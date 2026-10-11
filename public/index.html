@@ -23,10 +23,11 @@
     <nav class="nav-container" aria-label="Primary">
       <a class="brand" href="#top"><span class="brand-atom" aria-hidden="true">⚛</span> <span class="brand-name">Dr. Alex Rivera, PhD</span></a>
       <div class="nav-links" id="nav-links">
-          <a class="nav-link" href="#about">About</a>
+          <a class="nav-link" href="about.html">About</a>
           <a class="nav-link" href="#research">Research</a>
           <a class="nav-link" href="#publications">Publications</a>
           <a class="nav-link" href="#projects">Projects</a>
+          <a class="nav-link" href="blog.html">Blog</a>
           <a class="nav-link" href="#talks">Talks</a>
           <a class="nav-link" href="#teaching">Teaching</a>
           <a class="nav-link" href="#advocacy">Advocacy</a>
@@ -68,28 +69,12 @@
       <div class="scroll-hint" aria-hidden="true">▾</div>
     </section>
 
-    <!-- ABOUT -->
+    <!-- ABOUT (teaser — full text lives in src/content/about/about.md) -->
     <section class="section" id="about">
       <div class="section-inner">
         <h2 class="section-title"><span class="hash">#</span> About</h2>
-        <p class="about-lead">I decode noise into knowledge.</p>
-        <p class="about-p">I am a quantum information scientist working at the intersection of <strong>superconducting qubits</strong>, <strong>quantum error correction</strong>, and <strong>open scientific software</strong>. My group's mission: make fault-tolerant quantum computing real — and make the path into quantum science welcoming for everyone, especially LGBTQ+ and underrepresented folks who too often get measured out of the wavefunction.</p>
-        <p class="about-p">As an openly queer, nonbinary-leaning (she/they) academic, I believe representation is a form of error correction for the scientific community: it catches the bit-flips of bias before they propagate through a career. I mentor queer STEM students, review for inclusive hiring, and build tools that lower the barrier to entry into quantum research.</p>
-        <div class="tag-row chip-row"><span class="chip">Quantum Error Correction</span><span class="chip">Superconducting Circuits</span><span class="chip">Quantum ML</span><span class="chip">Open Source</span><span class="chip">Science Policy</span><span class="chip">DEI in STEM</span></div>
-        <div class="highlights-grid">
-        <div class="highlight-card reveal">
-          <div class="highlight-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 3h6M10 3v6L4.5 18a2 2 0 0 0 1.8 3h11.4a2 2 0 0 0 1.8-3L14 9V3"/><path d="M7 15h10"/></svg></div>
-          <div><h3>Currently</h3><p>Building a surface-code simulator (QubitForge) and running logical-qubit benchmarks on a 127-node transmon processor.</p></div>
-        </div>
-        <div class="highlight-card reveal">
-          <div class="highlight-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5"/></svg></div>
-          <div><h3>Recognition</h3><p>NSF CAREER Award (2024) · QuTech Best Paper (2023) · Cornell LGBTQ+ Faculty Mentor of the Year (2025).</p></div>
-        </div>
-        <div class="highlight-card reveal">
-          <div class="highlight-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2c3 3.5 3 16.5 0 20-3-3.5-3-16.5 0-20z"/></svg></div>
-          <div><h3>Community</h3><p>Co-founder of QueerQuantum — a global network of 500+ LGBTQ+ quantum scientists and allies.</p></div>
-        </div>
-        </div>
+        <p class="about-lead">I decode noise into knowledge — in quantum systems, and in the communities around them.</p>
+        <a class="btn btn-ghost" href="about.html">Read my full story →</a>
       </div>
     </section>
 
@@ -137,103 +122,61 @@
     <section class="section" id="publications">
       <div class="section-inner">
         <h2 class="section-title"><span class="hash">#</span> Selected Publications</h2>
-        <p class="section-intro">Selected publications — full list on Google Scholar. (* = equal contribution, † = corresponding) · <a href="https://scholar.google.com/" target="_blank" rel="noopener">Full list on Google Scholar →</a></p>
+        <p class="section-intro">Peer-reviewed papers written as Markdown in <code>src/content/publications/</code>. Each file has front matter (title, authors, venue, year, doi, tags, citations) and an abstract body — edit the <code>.md</code>, rebuild, done. · <a href="https://scholar.google.com/" target="_blank" rel="noopener">Full list on Google Scholar →</a></p>
         <ol class="pub-list">
         <li class="pub reveal">
-          <div class="pub-year">2026</div>
-          <div class="pub-body">
-            <h3 class="pub-title">Logical-time crystalline order on a noisy superconducting quantum processor</h3>
-            <p class="pub-authors">A. Rivera*, J. Okafor*, M. Lindqvist, S. Chen, D. Whitfield†</p>
-            <p class="pub-venue"><em>Nature Physics</em> · <a href="https://doi.org/10.1038/s41567-026-0012-3" target="_blank" rel="noopener">doi:10.1038/s41567-026-0012-3</a></p>
-            <div class="tag-row">
-              <span class="tag tag-sm">Experiment</span><span class="tag tag-sm">Error Correction</span>
-              <span class="cite-badge" title="Citations">▲ 42 citations</span>
-            </div>
-          </div>
+          <details>
+            <summary>
+              <span class="pub-year">2026</span>
+              <div class="pub-body">
+                <h3 class="pub-title">Logical Qubit Lifetime Beyond Break-Even in a Distance-7 Surface Code</h3>
+                <p class="pub-authors">A. Rivera, J. Okafor, M. Lindqvist, et al.</p>
+                <p class="pub-venue"><em>Nature Physics</em> · <a href="https://doi.org/10.1038/s41567-026-0123-4" target="_blank" rel="noopener" onclick="event.stopPropagation();">doi:10.1038/s41567-026-0123-4</a></p>
+                <div class="tag-row">
+                  <span class="tag tag-sm">[error correction</span><span class="tag tag-sm">experiment]</span>
+                  <span class="cite-badge" title="Citations">▲ 87 citations</span>
+                  <span class="pub-toggle">▾ abstract</span>
+                </div>
+              </div>
+            </summary>
+            <div class="md-body pub-abstract"><p>We demonstrate a distance-7 surface code whose logical error rate falls exponentially with code distance, crossing the break-even threshold relative to the best physical qubit in the same device. Key improvements include tunable couplers with reduced crosstalk and a real-time MWPM decoder running at 1 MHz syndrome rates. Our results establish a practical path toward large-scale fault-tolerant computation.</p></div>
+          </details>
         </li>
         <li class="pub reveal">
-          <div class="pub-year">2025</div>
-          <div class="pub-body">
-            <h3 class="pub-title">QubitForge: a GPU-accelerated stabilizer simulator with differentiable noise channels</h3>
-            <p class="pub-authors">A. Rivera†, L. Park, T. Alvarez</p>
-            <p class="pub-venue"><em>PRX Quantum 6, 020345</em> · <a href="https://doi.org/10.1103/PRXQuantum.6.020345" target="_blank" rel="noopener">doi:10.1103/PRXQuantum.6.020345</a></p>
-            <div class="tag-row">
-              <span class="tag tag-sm">Software</span><span class="tag tag-sm">Open Source</span>
-              <span class="cite-badge" title="Citations">▲ 118 citations</span>
-            </div>
-          </div>
+          <details>
+            <summary>
+              <span class="pub-year">2025</span>
+              <div class="pub-body">
+                <h3 class="pub-title">Suppressing ZZ Crosstalk in Fixed-Frequency Transmon Arrays via Flux-Shunted Couplers</h3>
+                <p class="pub-authors">M. Lindqvist, A. Rivera, T. Sandoval</p>
+                <p class="pub-venue"><em>PRX Quantum</em> · <a href="https://doi.org/10.1103/PRXQuantum.6.020301" target="_blank" rel="noopener" onclick="event.stopPropagation();">doi:10.1103/PRXQuantum.6.020301</a></p>
+                <div class="tag-row">
+                  <span class="tag tag-sm">[hardware</span><span class="tag tag-sm">superconducting qubits]</span>
+                  <span class="cite-badge" title="Citations">▲ 142 citations</span>
+                  <span class="pub-toggle">▾ abstract</span>
+                </div>
+              </div>
+            </summary>
+            <div class="md-body pub-abstract"><p>Static ZZ interactions remain a dominant error source in fixed-frequency transmon lattices. We introduce a flux-shunted coupler architecture that reduces residual ZZ by two orders of magnitude while preserving fast two-qubit gates, verified across a 60-qubit processor.</p></div>
+          </details>
         </li>
         <li class="pub reveal">
-          <div class="pub-year">2025</div>
-          <div class="pub-body">
-            <h3 class="pub-title">Rainbow metrics: auditing inclusion outcomes in quantum workforce programs</h3>
-            <p class="pub-authors">K. Nguyen, A. Rivera</p>
-            <p class="pub-venue"><em>Physical Review Physics Education Research 20</em> · <a href="https://doi.org/10.1103/PhysRevPhysEducRes.20.010123" target="_blank" rel="noopener">doi:10.1103/PhysRevPhysEducRes.20.010123</a></p>
-            <div class="tag-row">
-              <span class="tag tag-sm">DEI</span><span class="tag tag-sm">Education</span>
-              <span class="cite-badge" title="Citations">▲ 27 citations</span>
-            </div>
-          </div>
-        </li>
-        <li class="pub reveal">
-          <div class="pub-year">2024</div>
-          <div class="pub-body">
-            <h3 class="pub-title">Low-overhead magic-state cultivation with twisted bilayer decoders</h3>
-            <p class="pub-authors">S. Chen, A. Rivera, M. Lindqvist</p>
-            <p class="pub-venue"><em>Quantum 8, 1402</em> · <a href="https://doi.org/10.22331/q-2024-08-14-1402" target="_blank" rel="noopener">doi:10.22331/q-2024-08-14-1402</a></p>
-            <div class="tag-row">
-              <span class="tag tag-sm">Theory</span><span class="tag tag-sm">Magic States</span>
-              <span class="cite-badge" title="Citations">▲ 96 citations</span>
-            </div>
-          </div>
-        </li>
-        <li class="pub reveal">
-          <div class="pub-year">2024</div>
-          <div class="pub-body">
-            <h3 class="pub-title">Calibration-as-code: reproducible experiment control for transmon arrays</h3>
-            <p class="pub-authors">T. Alvarez, R. Iyer, A. Rivera†</p>
-            <p class="pub-venue"><em>npj Quantum Information 10</em> · <a href="https://doi.org/10.1038/s41534-024-00812-x" target="_blank" rel="noopener">doi:10.1038/s41534-024-00812-x</a></p>
-            <div class="tag-row">
-              <span class="tag tag-sm">Software</span><span class="tag tag-sm">Experiment</span>
-              <span class="cite-badge" title="Citations">▲ 61 citations</span>
-            </div>
-          </div>
-        </li>
-        <li class="pub reveal">
-          <div class="pub-year">2023</div>
-          <div class="pub-body">
-            <h3 class="pub-title">Quantum kernel methods for high-entropy alloy screening at NISQ scale</h3>
-            <p class="pub-authors">L. Park, A. Rivera, H. Yamada</p>
-            <p class="pub-venue"><em>Quantum Science and Technology 8(4)</em> · <a href="https://doi.org/10.1088/2058-9565/acf3b1" target="_blank" rel="noopener">doi:10.1088/2058-9565/acf3b1</a></p>
-            <div class="tag-row">
-              <span class="tag tag-sm">Quantum ML</span><span class="tag tag-sm">Materials</span>
-              <span class="cite-badge" title="Citations">▲ 143 citations</span>
-            </div>
-          </div>
-        </li>
-        <li class="pub reveal">
-          <div class="pub-year">2023</div>
-          <div class="pub-body">
-            <h3 class="pub-title">Measurement-free fault tolerance with coherent feedback</h3>
-            <p class="pub-authors">D. Whitfield, A. Rivera</p>
-            <p class="pub-venue"><em>PRL 131, 080601</em> · <a href="https://doi.org/10.1103/PhysRevLett.131.080601" target="_blank" rel="noopener">doi:10.1103/PhysRevLett.131.080601</a></p>
-            <div class="tag-row">
-              <span class="tag tag-sm">Theory</span><span class="tag tag-sm">Best Paper</span>
-              <span class="cite-badge" title="Citations">▲ 205 citations</span>
-            </div>
-          </div>
-        </li>
-        <li class="pub reveal">
-          <div class="pub-year">2022</div>
-          <div class="pub-body">
-            <h3 class="pub-title">QueerQuantum: building a global community for LGBTQ+ scientists in quantum tech</h3>
-            <p class="pub-authors">A. Rivera†, Community Collective</p>
-            <p class="pub-venue"><em>Bulletin of the APS (Forum on Education)</em></p>
-            <div class="tag-row">
-              <span class="tag tag-sm">Community</span><span class="tag tag-sm">Invited</span>
-              <span class="cite-badge" title="Citations">▲ 19 citations</span>
-            </div>
-          </div>
+          <details>
+            <summary>
+              <span class="pub-year">2024</span>
+              <div class="pub-body">
+                <h3 class="pub-title">Real-Time Minimum-Weight Perfect Matching on FPGAs for Surface-Code Decoding</h3>
+                <p class="pub-authors">J. Okafor, A. Rivera, S. Bhatt</p>
+                <p class="pub-venue"><em>Quantum</em> · <a href="https://doi.org/10.22331/q-2024-08-12-1456" target="_blank" rel="noopener" onclick="event.stopPropagation();">doi:10.22331/q-2024-08-12-1456</a></p>
+                <div class="tag-row">
+                  <span class="tag tag-sm">[decoding</span><span class="tag tag-sm">software</span><span class="tag tag-sm">open source]</span>
+                  <span class="cite-badge" title="Citations">▲ 203 citations</span>
+                  <span class="pub-toggle">▾ abstract</span>
+                </div>
+              </div>
+            </summary>
+            <div class="md-body pub-abstract"><p>We present a pipelined FPGA implementation of the minimum-weight perfect-matching decoder capable of processing distance-32 surface-code syndromes within a 1 µs cycle, enabling closed-loop active error correction. All firmware is open source.</p></div>
+          </details>
         </li>
         </ol>
       </div>
@@ -243,39 +186,59 @@
     <section class="section section-alt" id="projects">
       <div class="section-inner">
         <h2 class="section-title"><span class="hash">#</span> Open-Source Projects</h2>
-        <p class="section-intro">Everything below is open source (or openly published). Star it, fork it, audit it — and PRs from queer devs get priority review. 🏳️‍🌈</p>
+        <p class="section-intro">Open-source work documented in Markdown under &lt;code&gt;src/content/projects/&lt;/code&gt; — name, language, badge, stars and a full README-style description per project.</p>
         <div class="project-grid">
-        <a class="project-card reveal" href="https://github.com/" target="_blank" rel="noopener noreferrer">
-          <div class="project-top"><h3>QubitForge</h3><span class="badge">Flagship</span></div>
-          <p>GPU-accelerated stabilizer + state-vector simulator with differentiable noise channels. Powers 40+ papers.</p>
-          <div class="project-meta"><span>Python / CUDA</span><span class="stars"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg> 3.1k</span></div>
-        </a>
-        <a class="project-card reveal" href="https://github.com/" target="_blank" rel="noopener noreferrer">
-          <div class="project-top"><h3>calib-daemon</h3><span class="badge">Tooling</span></div>
-          <p>Always-on transmon calibration framework: drift detection, auto-rerun, and git-versioned calibration reports.</p>
-          <div class="project-meta"><span>Python</span><span class="stars"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg> 640</span></div>
-        </a>
-        <a class="project-card reveal" href="https://github.com/" target="_blank" rel="noopener noreferrer">
-          <div class="project-top"><h3>qec-playbook</h3><span class="badge">Education</span></div>
-          <p>Interactive textbook: 'Surface Codes for Humans' — runnable notebooks from Bloch sphere to lattice surgery.</p>
-          <div class="project-meta"><span>Jupyter / mdBook</span><span class="stars"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg> 1.8k</span></div>
-        </a>
-        <a class="project-card reveal" href="https://github.com/" target="_blank" rel="noopener noreferrer">
-          <div class="project-top"><h3>rainbow-pulse</h3><span class="badge">Accessibility</span></div>
-          <p>Pulse-sequence designer with accessibility-first UI: screen-reader labels, colorblind-safe palettes, keyboard nav.</p>
-          <div class="project-meta"><span>TypeScript / WASM</span><span class="stars"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg> 410</span></div>
-        </a>
-        <a class="project-card reveal" href="https://github.com/" target="_blank" rel="noopener noreferrer">
-          <div class="project-top"><h3>queerquantum-site</h3><span class="badge">Community</span></div>
-          <p>Community hub, mentorship matching, and job board for LGBTQ+ quantum scientists &amp; allies.</p>
-          <div class="project-meta"><span>Hugo / JS</span><span class="stars"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg> 180</span></div>
-        </a>
-        <a class="project-card reveal" href="https://github.com/" target="_blank" rel="noopener noreferrer">
-          <div class="project-top"><h3>noise-zoo</h3><span class="badge">Data</span></div>
-          <p>Curated library of benchmarked noise models from real devices — because synthetic depolarizing noise lies.</p>
-          <div class="project-meta"><span>JSON / Python</span><span class="stars"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg> 520</span></div>
-        </a>
+        <article class="project-card reveal">
+          <a class="project-link" href="https://github.com/arivera-lab/mwpm-fpga" target="_blank" rel="noopener noreferrer"><h3>mwpm-fpga</h3></a>
+          <div class="project-top"><span class="badge">decoding</span></div>
+          <p class="project-tagline">Pipelined MWPM decoder firmware for real-time surface-code correction.</p>
+          <div class="md-body project-desc"><p>Streams syndromes at 1 MHz, matches up to distance-32 patches in under a microsecond, drop-in compatible with <code>stim</code> output. Used by four external groups to close the loop on active error correction experiments.</p></div>
+          <div class="project-meta"><span>SystemVerilog</span><span class="stars"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg> 289</span></div>
+        </article>
+        <article class="project-card reveal">
+          <a class="project-link" href="https://github.com/arivera-lab/qnoise-kit" target="_blank" rel="noopener noreferrer"><h3>qnoise-kit</h3></a>
+          <div class="project-top"><span class="badge">education</span></div>
+          <p class="project-tagline">Teaching toolkit for noise channels, decoding demos, and rainbow-graded labs.</p>
+          <div class="md-body project-desc"><p>Jupyter-based lab exercises where students inject noise, run decoders, and plot logical error curves. Written for our &quot;Quantum Error Correction for Everyone&quot; workshop series; used by 12 universities.</p></div>
+          <div class="project-meta"><span>Python</span><span class="stars"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg> 156</span></div>
+        </article>
+        <article class="project-card reveal">
+          <a class="project-link" href="https://github.com/arivera-lab/qublock" target="_blank" rel="noopener noreferrer"><h3>qublock</h3></a>
+          <div class="project-top"><span class="badge">open hardware</span></div>
+          <p class="project-tagline">Modular 16-channel analog control stack for superconducting qubits.</p>
+          <div class="md-body project-desc"><p>Full stack for lab-friendly qubit control: RF sources, baseband mixers, and a digital backplane. Includes schematics, Gerbers, firmware, and a calibration notebook template. Built because commercial racks were eating 60% of our grant money.</p></div>
+          <div class="project-meta"><span>VHDL / KiCad</span><span class="stars"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg> 412</span></div>
+        </article>
         </div>
+      </div>
+    </section>
+
+    <!-- BLOG (preview cards — posts live in src/content/blog/*.md) -->
+    <section class="section" id="blog">
+      <div class="section-inner">
+        <h2 class="section-title rainbow-text"><span class="hash">#</span> Latest Writing</h2>
+        <p class="section-intro">Notes on quantum science, queer life in academia, and open research — each post is a Markdown file in <code>src/content/blog/</code> with YAML front matter. Supports tables, code blocks, task lists and $LaTeX$ math.</p>
+        <div class="blog-grid">
+          <article class="blog-card reveal">
+            <a class="blog-card-link" href="blog/noise-is-a-feature.html"><h3>Noise Is a Feature, Not a Bug</h3></a>
+            <p class="blog-meta">August 14, 2026 · 1 min read</p>
+            <p class="blog-summary">Why the errors we fight every day in the lab are exactly what makes fault tolerance possible — and what that teaches us about resilience.</p>
+            <div class="tag-row"><span class="tag tag-sm">[quantum error correction</span><span class="tag tag-sm">research]</span></div>
+          </article>
+          <article class="blog-card reveal">
+            <a class="blog-card-link" href="blog/open-hardware-manifesto.html"><h3>An Open-Hardware Manifesto for Quantum Labs</h3></a>
+            <p class="blog-meta">May 2, 2026 · 1 min read</p>
+            <p class="blog-summary">Control electronics are the bottleneck of every quantum lab. Here's why we publish ours — schematics, firmware, BOM and all.</p>
+            <div class="tag-row"><span class="tag tag-sm">[open science</span><span class="tag tag-sm">hardware]</span></div>
+          </article>
+          <article class="blog-card reveal">
+            <a class="blog-card-link" href="blog/coming-out-in-lab-meetings.html"><h3>Coming Out in Lab Meetings (and Other Phase Transitions)</h3></a>
+            <p class="blog-meta">February 19, 2026 · 1 min read</p>
+            <p class="blog-summary">Practical notes on building visibility in physics departments — what worked, what backfired, and why pronouns on name tags beat policy memos.</p>
+            <div class="tag-row"><span class="tag tag-sm">[community</span><span class="tag tag-sm">academia]</span></div>
+          </article>
+        </div>
+        <p class="see-all"><a class="btn btn-ghost" href="blog.html">All blog posts →</a></p>
       </div>
     </section>
 
@@ -454,6 +417,9 @@
     <p class="footer-sub">Inspired by <a href="https://gitlab.com/ian-s-mcb/smigle-hugo-theme" target="_blank" rel="noopener">Smigle</a> · Deployed on GitHub Pages</p>
   </footer>
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

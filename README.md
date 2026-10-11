@@ -27,16 +27,45 @@ and an interactive **quantum-entanglement particle canvas** (particles attract t
 
 **Quality:** fully responsive, keyboard-friendly, ARIA labels, semantic HTML, `prefers-reduced-motion` respected, no build frameworks.
 
-### 🗂 Structure
+### 🗂 Structure — **everything you write is Markdown** ✍️
 
 ```
-src/site-data.json            ← ALL content lives here (edit me!)
-src/styles/main.css           ← theme
+src/content/
+├── about/about.md            ← your About page (front matter: title, lead)
+├── blog/*.md                 ← one file per blog post (title, date, tags, summary)
+├── publications/*.md         ← one file per paper (authors, venue, year, doi, citations) + abstract body
+└── projects/*.md             ← one file per project (name, badge, lang, stars, url) + README-style body
+src/site-data.json            ← meta/nav/research/talks/teaching/advocacy/cv/contact config
+src/md.js                     ← zero-dependency Markdown renderer (+ front-matter parser)
+src/styles/main.css           ← theme incl. .md-body typography, tables, code blocks, task lists
 src/js/app.js                 ← particles, reveal, nav-spy, count-ups
-build.js                      ← renders src → public/index.html
-public/                       ← deploy output (index.html, styles/, js/)
+build.js                      ← renders md + data → public/ (index, about, blog index & posts)
+public/                       ← deploy output
 .github/workflows/deploy.yml  ← auto-deploy on push to main
 ```
+
+### ✍️ Writing content in Markdown
+
+Just create/edit a `.md` file and run `npm run build` (or just push — CI rebuilds? *no:* commit `public/` too, or add the build step to the workflow).
+
+```markdown
+---
+title: My New Post
+date: 2026-10-11
+tags: [quantum, life]
+summary: One-paragraph teaser shown on cards.
+---
+
+## Headings, **bold**, *italic*, `code`
+
+- Task lists: - [x] done / - [ ] todo
+- Tables, blockquotes, links, images — all supported
+- Inline math $p \approx e^{-d}$ and display math:
+
+$$P_{\text{logical}} \sim (p/p_{\text{th}})^{\lfloor (d+1)/2 \rfloor}$$
+```
+
+Supported: headings, emphasis, strikethrough, links/autolinks, images, nested lists, task lists, fenced code blocks, GFM tables with alignment, blockquotes, horizontal rules, and **LaTeX via KaTeX** ($…$, $$…$$). Blog posts get their own page at `blog/<slug>.html`, appear on the Blog index and in the homepage "Latest Writing" section automatically. Publications render as expandable abstracts; project bodies render inside their cards.
 
 ### 🚀 Local dev
 

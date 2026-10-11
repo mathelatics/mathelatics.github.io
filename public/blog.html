@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog — Dr. Alex Rivera, PhD</title>
+  <meta name="description" content="Writing on quantum science, queer academia, and open research." />
+  <meta property="og:title" content="Blog" />
+  <meta property="og:description" content="Writing on quantum science, queer academia, and open research." />
+  <meta name="theme-color" content="#0b0e1a" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚛️</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body class="subpage">
+  <canvas id="quantum-canvas" aria-hidden="true"></canvas>
+  <div class="rainbow-bar" aria-hidden="true"></div>
+  <header class="site-header">
+    <nav class="nav-container" aria-label="Primary">
+      <a class="brand" href="index.html"><span class="brand-atom" aria-hidden="true">⚛</span> <span class="brand-name">Dr. Alex Rivera, PhD</span></a>
+      <div class="nav-links" id="nav-links">
+          <a class="nav-link" href="about.html">About</a>
+          <a class="nav-link" href="index.html#research">Research</a>
+          <a class="nav-link" href="index.html#publications">Publications</a>
+          <a class="nav-link" href="index.html#projects">Projects</a>
+          <a class="nav-link" href="blog.html">Blog</a>
+          <a class="nav-link" href="index.html#talks">Talks</a>
+          <a class="nav-link" href="index.html#teaching">Teaching</a>
+          <a class="nav-link" href="index.html#advocacy">Advocacy</a>
+          <a class="nav-link" href="index.html#cv">CV</a>
+          <a class="nav-link" href="index.html#contact">Contact</a>
+      </div>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+  <main class="page-main">
+    <section class="page-section">
+      <div class="section-inner">
+        <h1 class="page-title rainbow-text">Blog</h1>
+        <p class="section-intro">Notes on quantum science, queer life in academia, and open research — each post is a Markdown file in <code>src/content/blog/</code> with YAML front matter. Supports tables, code blocks, task lists and $LaTeX$ math.</p>
+        <div class="blog-grid">
+          <article class="blog-card reveal">
+            <a class="blog-card-link" href="blog/noise-is-a-feature.html"><h3>Noise Is a Feature, Not a Bug</h3></a>
+            <p class="blog-meta">📅 August 14, 2026 · ⏱ 1 min read</p>
+            <p class="blog-summary">Why the errors we fight every day in the lab are exactly what makes fault tolerance possible — and what that teaches us about resilience.</p>
+            <div class="tag-row"><span class="tag tag-sm">[quantum error correction</span><span class="tag tag-sm">research]</span></div>
+          </article>
+          <article class="blog-card reveal">
+            <a class="blog-card-link" href="blog/open-hardware-manifesto.html"><h3>An Open-Hardware Manifesto for Quantum Labs</h3></a>
+            <p class="blog-meta">📅 May 2, 2026 · ⏱ 1 min read</p>
+            <p class="blog-summary">Control electronics are the bottleneck of every quantum lab. Here's why we publish ours — schematics, firmware, BOM and all.</p>
+            <div class="tag-row"><span class="tag tag-sm">[open science</span><span class="tag tag-sm">hardware]</span></div>
+          </article>
+          <article class="blog-card reveal">
+            <a class="blog-card-link" href="blog/coming-out-in-lab-meetings.html"><h3>Coming Out in Lab Meetings (and Other Phase Transitions)</h3></a>
+            <p class="blog-meta">📅 February 19, 2026 · ⏱ 1 min read</p>
+            <p class="blog-summary">Practical notes on building visibility in physics departments — what worked, what backfired, and why pronouns on name tags beat policy memos.</p>
+            <div class="tag-row"><span class="tag tag-sm">[community</span><span class="tag tag-sm">academia]</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-rainbow" aria-hidden="true"></div>
+    <p>© 2026 Dr. Alex Rivera, PhD · Built with ♥ and open science</p>
+    <p class="footer-sub"><a href="index.html">← Home</a> · Inspired by <a href="https://gitlab.com/ian-s-mcb/smigle-hugo-theme" target="_blank" rel="noopener">Smigle</a> · Deployed on GitHub Pages</p>
+  </footer>
+  <script src="js/app.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</body>
+</html>
