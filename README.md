@@ -11,14 +11,12 @@ rebuilt as a zero-dependency static site that deploys straight to **GitHub Pages
 | Section | Highlights |
 |---|---|
 | **Hero** | Animated pride-gradient avatar ring, gradient name, pronoun chip, social buttons (GitHub / Scholar / ORCID / LinkedIn / Mastodon), count-up stats |
-| **About** | Narrative bio tying quantum research to queer advocacy + focus chips |
+| **About** | Markdown-driven bio (`src/content/about/about.md`) with a link to the full CV page |
 | **Research** | 5 color-accented research-thrust cards with hover glow |
 | **Publications** | Year-tagged list with DOIs, venue, tags & citation badges |
 | **Projects** | GitHub-style open-source cards (stars, language, badges) |
 | **Talks** | Timeline list with keynote / invited / panel / tutorial pills |
-| **Teaching** | Course cards + mentoring stats |
-| **Advocacy** | LGBTQ+ community work, rainbow accents & pull-quote |
-| **CV** | Gradient timeline of appointments + awards/service sidebar |
+| **CV** | Dedicated page (`cv.html`) — gradient timeline, awards/service, plus Markdown teaching table, mentoring & grants (`src/content/cv/cv.md`); downloadable PDF auto-generated at build; linked from About and homepage |
 | **Contact** | Styled form + office-hours block |
 
 **Visual system:** deep-space navy `#0b0e1a`, quantum violet/cyan/pink gradients, pride-rainbow bars,
@@ -35,7 +33,8 @@ src/content/
 ├── blog/*.md                 ← one file per blog post (title, date, tags, summary)
 ├── publications/*.md         ← one file per paper (authors, venue, year, doi, citations) + abstract body
 └── projects/*.md             ← one file per project (name, badge, lang, stars, url) + README-style body
-src/site-data.json            ← meta/nav/research/talks/teaching/advocacy/cv/contact config
+src/site-data.json            ← meta/nav/research/talks/cv/contact config
+src/content/cv/cv.md            ← CV page body (teaching table, mentoring, grants)
 src/md.js                     ← zero-dependency Markdown renderer (+ front-matter parser)
 src/styles/main.css           ← theme incl. .md-body typography, tables, code blocks, task lists
 src/js/app.js                 ← particles, reveal, nav-spy, count-ups

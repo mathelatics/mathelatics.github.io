@@ -489,74 +489,21 @@ a:hover { color: #7ee7f7; }
 .type-panel { background: rgba(251, 191, 36, 0.12); border-color: rgba(251, 191, 36, 0.4); color: #ffe1a0; }
 .type-tutorial { background: rgba(52, 211, 153, 0.12); border-color: rgba(52, 211, 153, 0.4); color: #a7f3d0; }
 
-/* Teaching */
-.course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.2rem; margin-bottom: 1.6rem; }
-.course-card {
+/* ---------- CV teaser (homepage) & CV page ---------- */
+.cv-teaser { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.6rem; }
+.cv-teaser-item {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 1.4rem;
-  transition: transform .22s, border-color .22s;
+  padding: 1.1rem 1.3rem;
+  display: flex; flex-direction: column; gap: .2rem;
 }
-.course-card:hover { transform: translateY(-4px); border-color: rgba(52, 211, 153, 0.5); }
-.course-code { font-family: var(--font-mono); font-size: 0.78rem; color: var(--green); margin-bottom: 0.4rem; }
-.course-card h3 { font-family: var(--font-display); font-size: 1.05rem; margin-bottom: 0.3rem; }
-.course-term { font-size: 0.8rem; color: var(--text-faint); margin-bottom: 0.6rem; }
-.course-card p:not(.course-term) { font-size: 0.88rem; color: var(--text-dim); }
-.course-rating { color: var(--amber) !important; font-family: var(--font-mono); font-size: 0.8rem !important; margin-top: 0.6rem; }
-.mentoring-note {
-  background: rgba(52, 211, 153, 0.08);
-  border: 1px solid rgba(52, 211, 153, 0.3);
-  border-radius: 14px;
-  padding: 1rem 1.3rem;
-  color: var(--text-dim);
-  font-size: 0.95rem;
-}
-
-/* Advocacy */
-.advocacy { position: relative; }
-.advocacy::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0 0;
-  height: 1px;
-  background: var(--rainbow);
-  opacity: 0.5;
-}
-.advocacy-lead { font-family: var(--font-display); font-size: 1.2rem; color: var(--text) !important; }
-.advocacy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.1rem; margin-bottom: 2.2rem; }
-.advocacy-item {
-  display: flex;
-  gap: 0.95rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.25rem;
-  transition: transform .22s;
-}
-.advocacy-item:hover { transform: translateY(-4px); }
-.advocacy-item:nth-child(5n+1) .advocacy-icon { color: #ff5c8a; }
-.advocacy-item:nth-child(5n+2) .advocacy-icon { color: #fbbf24; }
-.advocacy-item:nth-child(5n+3) .advocacy-icon { color: #34d399; }
-.advocacy-item:nth-child(5n+4) .advocacy-icon { color: #22d3ee; }
-.advocacy-item:nth-child(5n+5) .advocacy-icon { color: #7c5cff; }
-.advocacy-icon { flex-shrink: 0; margin-top: 2px; }
-.advocacy-item h3 { font-family: var(--font-display); font-size: 1rem; margin-bottom: 0.3rem; }
-.advocacy-item p { font-size: 0.88rem; color: var(--text-dim); }
-
-.pull-quote {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-  max-width: 780px;
-  margin: 0 auto;
-  padding: 1.6rem 1.8rem;
-  border-radius: var(--radius);
-  background: linear-gradient(120deg, rgba(124,92,255,0.12), rgba(255,92,138,0.10));
-  border: 1px solid rgba(124, 92, 255, 0.35);
-}
-.pull-quote svg { color: var(--violet); flex-shrink: 0; }
-.pull-quote p { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; font-style: italic; }
+.cv-num { font-family: var(--font-display); font-size: 1.7rem; font-weight: 800; background: linear-gradient(90deg, #7c5cff, #22d3ee); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.cv-cap { font-size: .82rem; color: var(--text-dim); }
+.cv-actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.4rem; }
+.cv-updated { font-family: var(--font-mono); font-size: .8rem; color: var(--text-faint); }
+.cv-md { margin-top: 2.2rem; }
+.page-crosslinks { margin-top: 2rem; }
 
 /* CV */
 .cv-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 2.4rem; }

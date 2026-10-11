@@ -8,7 +8,7 @@ const { renderMarkdown, parseFrontMatter } = require('./src/md');
 const ROOT = __dirname;
 const CONTENT = path.join(ROOT, 'src/content');
 const data = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/site-data.json'), 'utf8'));
-const { meta, nav, social, heroStats, research, publications, projects, talks, teaching, advocacy, cv, contact, blog } = data;
+const { meta, nav, social, heroStats, research, publications, projects, talks, cv, contact, blog } = data;
 
 /* ---- Markdown content loaders ---- */
 function loadDir(sub) {
@@ -24,6 +24,7 @@ const aboutDoc = loadDir('about')[0] || { fm: {}, html: '<p>Add src/content/abou
 const posts = loadDir('blog').sort((a, b) => String(b.fm.date).localeCompare(String(a.fm.date)));
 const pubs = loadDir('publications').sort((a, b) => Number(b.fm.year) - Number(a.fm.year));
 const projs = loadDir('projects');
+const cvDoc = loadDir('cv')[0] || { fm: {}, html: '', body: '' };
 const fmtDate = (d) => { try { return new Date(d + 'T00:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }); } catch { return d; } };
 const readTime = (body) => Math.max(1, Math.round(body.split(/\s+/).length / 200)) + ' min read';
 
@@ -98,21 +99,6 @@ const talkItems = talks.list.map(t => `
           <span class="talk-type type-${t.type}">${esc(t.type)}</span>
         </li>`).join('');
 
-const courseCards = teaching.courses.map(c => `
-        <article class="course-card reveal">
-          <div class="course-code">${esc(c.code)}</div>
-          <h3>${esc(c.title)}</h3>
-          <p class="course-term">${esc(c.term)} · ${esc(c.level)}</p>
-          <p>${esc(c.desc)}</p>
-          ${c.rating ? `<p class="course-rating">★ ${esc(c.rating)}</p>` : ''}
-        </article>`).join('');
-
-const advocacyItems = advocacy.items.map(a => `
-        <div class="advocacy-item reveal">
-          <div class="advocacy-icon">${ICONS[a.icon]}</div>
-          <div><h3>${esc(a.title)}</h3><p>${esc(a.text)}</p></div>
-        </div>`).join('');
-
 const positionItems = cv.positions.map(p => `
         <li class="timeline-item reveal">
           <div class="timeline-dot"></div>
@@ -123,7 +109,7 @@ const awardItems = cv.awards.map(a => `<li class="reveal"><span class="award-yea
 const serviceItems = cv.service.map(s => `<li>${esc(s)}</li>`).join('');
 
 /* Homepage nav uses in-page anchors; sub-pages use full hrefs via pageShell */
-const pageLinks = { about: 'about.html', blog: 'blog.html' };
+const pageLinks = { about: 'about.html', blog: 'blog.html', cv: 'cv.html' };
 const navHtmlHome = nav.map(n => `<a class="nav-link" href="${pageLinks[n.id] || '#' + n.id}">${esc(n.label)}</a>`).join('\n          ');
 
 const html = `<!DOCTYPE html>
@@ -245,45 +231,19 @@ const html = `<!DOCTYPE html>
       </div>
     </section>
 
-    <!-- TEACHING -->
-    <section class="section section-alt" id="teaching">
-      <div class="section-inner">
-        <h2 class="section-title"><span class="hash">#</span> Teaching &amp; Mentoring</h2>
-        <p class="section-intro">${esc(teaching.intro)}</p>
-        <div class="course-grid">${courseCards}
-        </div>
-        <p class="mentoring-note reveal">🎓 ${esc(teaching.mentoring)}</p>
-      </div>
-    </section>
-
-    <!-- ADVOCACY -->
-    <section class="section advocacy" id="advocacy">
-      <div class="section-inner">
-        <h2 class="section-title rainbow-text"><span class="hash">#</span> LGBTQ+ Advocacy &amp; Community</h2>
-        <p class="section-intro advocacy-lead">${esc(advocacy.lead)}</p>
-        <div class="advocacy-grid">${advocacyItems}
-        </div>
-        <blockquote class="pull-quote reveal">${ICONS.quote}<p>${esc(advocacy.quote)}</p></blockquote>
-      </div>
-    </section>
-
-    <!-- CV -->
+    <!-- CV (teaser — full CV lives on cv.html, generated from src/content/cv/cv.md) -->
     <section class="section section-alt" id="cv">
       <div class="section-inner">
         <h2 class="section-title"><span class="hash">#</span> Curriculum Vitae</h2>
-        <div class="cv-grid">
-          <div>
-            <h3 class="cv-subtitle">Appointments</h3>
-            <ul class="timeline">${positionItems}
-            </ul>
-          </div>
-          <div class="cv-side">
-            <h3 class="cv-subtitle">Honors &amp; Awards</h3>
-            <ul class="award-list">${awardItems}</ul>
-            <h3 class="cv-subtitle">Professional Service</h3>
-            <ul class="service-list">${serviceItems}</ul>
-            <a class="btn btn-ghost btn-block" href="#" onclick="alert('PDF download placeholder — drop cv.pdf into /public and point this link at it.');return false;">⬇ Download full CV (PDF)</a>
-          </div>
+        <p class="section-intro">Appointments, education, honors, invited teaching &amp; mentoring, and professional service — all on one page. Written in Markdown at <code>src/content/cv/cv.md</code>.</p>
+        <div class="cv-teaser reveal">
+          <div class="cv-teaser-item"><span class="cv-num">${String(cvDoc.fm.years || '15+')}</span><span class="cv-cap">years in research &amp; teaching</span></div>
+          <div class="cv-teaser-item"><span class="cv-num">${String(cvDoc.fm.students || '30+')}</span><span class="cv-cap">students mentored</span></div>
+          <div class="cv-teaser-item"><span class="cv-num">${String(cvDoc.fm.awards || cv.awards.length)}</span><span class="cv-cap">major honors &amp; awards</span></div>
+        </div>
+        <div class="cv-actions">
+          <a class="btn btn-primary" href="cv.html">View full CV →</a>
+          <a class="btn btn-ghost" href="${esc(cv.pdf)}" download>⬇ Download PDF</a>
         </div>
       </div>
     </section>
@@ -393,7 +353,42 @@ writePage('about.html', pageShell({
       <div class="section-inner narrow">
         <h1 class="page-title gradient-text">${esc(aboutDoc.fm.title || 'About')}</h1>
         <p class="about-lead">${esc(aboutDoc.fm.lead || '')}</p>
-        <div class="md-body">${aboutDoc.html}</div>
+        <div class="md-body">${aboutDoc.html}
+          <p class="page-crosslinks"><a class="btn btn-ghost" href="cv.html">📄 Curriculum Vitae (full CV page) →</a></p>
+        </div>
+      </div>
+    </section>`
+}));
+
+/* ---- CV page (Markdown-driven: src/content/cv/cv.md + structured data) ---- */
+writePage('cv.html', pageShell({
+  title: cvDoc.fm.title || 'Curriculum Vitae',
+  desc: cvDoc.fm.lead || 'Full academic CV — appointments, education, teaching, mentoring, honors, and service.',
+  contentClass: 'page-main',
+  main: `    <section class="page-section">
+      <div class="section-inner">
+        <h1 class="page-title gradient-text">${esc(cvDoc.fm.title || 'Curriculum Vitae')}</h1>
+        <p class="about-lead">${esc(cvDoc.fm.lead || '')}</p>
+        <div class="cv-actions">
+          <a class="btn btn-primary" href="${esc(cv.pdf)}" download>⬇ Download PDF</a>
+          <span class="cv-updated">Updated ${esc(meta.updated)}</span>
+        </div>
+
+        <div class="cv-grid">
+          <div>
+            <h2 class="cv-subtitle"><span class="hash">#</span> Appointments</h2>
+            <ul class="timeline">${positionItems}
+            </ul>
+          </div>
+          <div class="cv-side">
+            <h2 class="cv-subtitle"><span class="hash">#</span> Honors &amp; Awards</h2>
+            <ul class="award-list">${awardItems}</ul>
+            <h2 class="cv-subtitle"><span class="hash">#</span> Professional Service</h2>
+            <ul class="service-list">${serviceItems}</ul>
+          </div>
+        </div>
+
+        ${cvDoc.html ? `<div class="cv-md md-body">${cvDoc.html}</div>` : ''}
       </div>
     </section>`
 }));

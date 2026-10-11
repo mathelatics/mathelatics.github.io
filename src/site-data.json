@@ -1,12 +1,12 @@
 {
   "meta": {
     "title": "Dr. Alex Rivera, PhD",
-    "tagline": "Quantum Information Scientist \u2022 LGBTQ+ Advocate \u2022 Open-Research Educator",
-    "description": "Academic & research portfolio of Dr. Alex Rivera \u2014 quantum error correction, superconducting qubits, and building inclusive science. Pronouns: she/they.",
+    "tagline": "Quantum Information Scientist • LGBTQ+ Advocate • Open-Research Educator",
+    "description": "Academic & research portfolio of Dr. Alex Rivera — quantum error correction, superconducting qubits, and building inclusive science. Pronouns: she/they.",
     "siteUrl": "https://mathelatics.github.io/",
     "avatarInitials": "AR",
     "pronouns": "she / they",
-    "location": "Ithaca, NY \u00b7 They/Them HQ",
+    "location": "Ithaca, NY · They/Them HQ",
     "email": "alex.rivera@cornell.example.edu",
     "orcid": "0000-0002-1825-0097",
     "scholarId": "EXAMPLE_QI Scholar ID",
@@ -44,19 +44,9 @@
       "href": "index.html#talks"
     },
     {
-      "id": "teaching",
-      "label": "Teaching",
-      "href": "index.html#teaching"
-    },
-    {
-      "id": "advocacy",
-      "label": "Advocacy",
-      "href": "index.html#advocacy"
-    },
-    {
       "id": "cv",
       "label": "CV",
-      "href": "index.html#cv"
+      "href": "cv.html"
     },
     {
       "id": "contact",
@@ -103,7 +93,7 @@
     },
     {
       "value": "1.4k+",
-      "label": "Citations \u00b7 h-index 19"
+      "label": "Citations · h-index 19"
     },
     {
       "value": "6",
@@ -119,7 +109,7 @@
     "areas": [
       {
         "title": "Fault-Tolerant Architectures",
-        "desc": "Surface & color codes, lattice surgery, and magic-state distillation with realistic noise models. Goal: reduce the overhead from logical qubit to useful circuit by 10\u00d7.",
+        "desc": "Surface & color codes, lattice surgery, and magic-state distillation with realistic noise models. Goal: reduce the overhead from logical qubit to useful circuit by 10×.",
         "tags": [
           "Surface Codes",
           "Lattice Surgery",
@@ -129,7 +119,7 @@
       },
       {
         "title": "Superconducting Qubit Hardware",
-        "desc": "Transmon design, 3D cavities, and parametric couplers. We chase T1/T2 beyond 500 \u00b5s while keeping fabrication yield above 90%.",
+        "desc": "Transmon design, 3D cavities, and parametric couplers. We chase T1/T2 beyond 500 µs while keeping fabrication yield above 90%.",
         "tags": [
           "Transmons",
           "Circuit QED",
@@ -170,11 +160,11 @@
     ]
   },
   "publications": {
-    "intro": "Peer-reviewed papers written as Markdown in <code>src/content/publications/</code>. Each file has front matter (title, authors, venue, year, doi, tags, citations) and an abstract body \u2014 edit the <code>.md</code>, rebuild, done.",
+    "intro": "Peer-reviewed papers written as Markdown in <code>src/content/publications/</code>. Each file has front matter (title, authors, venue, year, doi, tags, citations) and an abstract body — edit the <code>.md</code>, rebuild, done.",
     "scholarUrl": "https://scholar.google.com/"
   },
   "projects": {
-    "intro": "Open-source work documented in Markdown under <code>src/content/projects/</code> \u2014 name, language, badge, stars and a full README-style description per project."
+    "intro": "Open-source work documented in Markdown under <code>src/content/projects/</code> — name, language, badge, stars and a full README-style description per project."
   },
   "talks": {
     "list": [
@@ -198,7 +188,7 @@
       },
       {
         "date": "Jun 2025",
-        "title": "Keynote \u2014 Who Gets to Do Quantum?",
+        "title": "Keynote — Who Gets to Do Quantum?",
         "where": "InclusiveSTEM Summit, Berlin",
         "type": "keynote"
       },
@@ -210,7 +200,7 @@
       },
       {
         "date": "Nov 2024",
-        "title": "Surface Codes from Scratch \u2014 Tutorial",
+        "title": "Surface Codes from Scratch — Tutorial",
         "where": "NeurIPS Quantum Workshop",
         "type": "tutorial"
       },
@@ -222,98 +212,38 @@
       }
     ]
   },
-  "teaching": {
-    "intro": "Teaching is applied error correction: repeated gentle feedback keeps every student's logical information intact.",
-    "courses": [
-      {
-        "code": "PHYS 6610",
-        "title": "Quantum Computation I",
-        "term": "Fall 2024 \u2013 2026",
-        "level": "Graduate",
-        "rating": "4.9 / 5.0 \u00b7 128 evals",
-        "desc": "From qubits to surface codes with weekly lab simulations on real hardware."
-      },
-      {
-        "code": "INFO 4520",
-        "title": "Quantum Information for Everyone",
-        "term": "Spring 2025 \u2013 2026",
-        "level": "Undergraduate (no physics prereq!)",
-        "desc": "A deliberately gatekeeping-free intro course; 40% of cohort identify as LGBTQ+ or first-gen.",
-        "rating": "4.8 / 5.0 \u00b7 96 evals"
-      },
-      {
-        "code": "ENGRI 1285",
-        "title": "First-Year Seminar: Noise & Signal in Science and Society",
-        "term": "Fall 2025",
-        "level": "First-year",
-        "desc": "Uses quantum noise as a lens for misinformation, measurement bias, and belonging.",
-        "rating": "5.0 / 5.0 \u00b7 31 evals"
-      }
-    ],
-    "mentoring": "Mentored 14 PhD students (7 defended), 9 postdocs, and 30+ undergrads \u2014 60% women, gender-minority, or LGBTQ+ scholars."
-  },
-  "advocacy": {
-    "lead": "Science is for all of us. Full stop.",
-    "items": [
-      {
-        "icon": "flag",
-        "title": "QueerQuantum Co-Founder",
-        "text": "Built a 500+-member global network with mentorship circles, conference meet-ups, and an affirming job board."
-      },
-      {
-        "icon": "shield",
-        "title": "Departmental Climate Council",
-        "text": "Lead author of Cornell's first LGBTQ+ faculty & student climate report; drove pronoun-field adoption in university systems."
-      },
-      {
-        "icon": "book",
-        "title": "Inclusive Curriculum Working Group",
-        "text": "APS committee member rewriting quantum textbooks' examples, names, and problem sets to reflect real diversity."
-      },
-      {
-        "icon": "heart",
-        "title": "Trans Healthcare & Career Fund",
-        "text": "Raised $85k to cover transition-related care and conference travel for queer grad students."
-      },
-      {
-        "icon": "megaphone",
-        "title": "Visibility & Media",
-        "text": "Quilting, Nature Careers feature, NPR 'All Systems' interview \u2014 telling the story of an openly queer quantum scientist."
-      }
-    ],
-    "quote": "\u201cRepresentation is error correction for the scientific community.\u201d \u2014 Dr. Rivera, TEDx Ithaca 2026"
-  },
   "cv": {
+    "pdf": "cv/CV-Alex-Rivera.pdf",
     "positions": [
       {
         "role": "Associate Professor (tenured), Applied Physics & CS",
         "org": "Cornell University",
-        "period": "2023 \u2013 present",
-        "detail": "Quantum Systems Lab \u00b7 NSF CAREER PI"
+        "period": "2023 – present",
+        "detail": "Quantum Systems Lab · NSF CAREER PI"
       },
       {
         "role": "Assistant Professor of Applied Physics",
         "org": "Cornell University",
-        "period": "2019 \u2013 2023",
+        "period": "2019 – 2023",
         "detail": "Junior Faculty awardee, College of Engineering"
       },
       {
         "role": "Postdoctoral Fellow",
         "org": "QuTech, TU Delft",
-        "period": "2016 \u2013 2019",
-        "detail": "DiVincenzo group \u00b7 topological qubits program"
+        "period": "2016 – 2019",
+        "detail": "DiVincenzo group · topological qubits program"
       },
       {
         "role": "PhD, Physics",
         "org": "University of Maryland / JQI",
-        "period": "2011 \u2013 2016",
+        "period": "2011 – 2016",
         "detail": "Thesis: decoherence-free control of transmon arrays"
       },
       {
         "role": "BSc (Hons), Physics & Mathematics",
         "org": "University of Toronto",
-        "period": "2007 \u2013 2011",
-        "detail": "Gold Medalist \u00b7 Undergrad teaching award"
+        "period": "2007 – 2011",
+        "detail": "Gold Medalist · Undergrad teaching award"
       }
     ],
     "awards": [
@@ -335,21 +265,21 @@
       },
       {
         "year": "2021",
-        "name": "DOE Early Career Nominee \u00b7 Cornell Engaged Scholarship Prize"
+        "name": "DOE Early Career Nominee · Cornell Engaged Scholarship Prize"
       }
     ],
     "service": [
-      "Referee: Nature, PRL, PRX Quantum, Quantum \u2014 60+ reviews/yr",
+      "Referee: Nature, PRL, PRX Quantum, Quantum — 60+ reviews/yr",
       "Program Committee: QIP, IEEE ICQQ, NeurIPS Quantum Workshop",
-      "Chair, APS Quantum Computing Division DEI subcommittee (2024\u201326)"
+      "Chair, APS Quantum Computing Division DEI subcommittee (2024–26)"
     ]
   },
   "contact": {
-    "blurb": "For collaborations, speaking, mentoring requests, or just to say hi \u2014 my inbox is an open boundary condition.",
+    "blurb": "For collaborations, speaking, mentoring requests, or just to say hi — my inbox is an open boundary condition.",
     "office": "311 Clark Hall, Ithaca, NY 14853",
-    "officeHours": "Tuesdays 14:00\u201316:00 ET (in-person & virtual, tea provided \ud83e\uded6)"
+    "officeHours": "Tuesdays 14:00–16:00 ET (in-person & virtual, tea provided 🫖)"
   },
   "blog": {
-    "intro": "Notes on quantum science, queer life in academia, and open research \u2014 each post is a Markdown file in <code>src/content/blog/</code> with YAML front matter. Supports tables, code blocks, task lists and $LaTeX$ math."
+    "intro": "Notes on quantum science, queer life in academia, and open research — each post is a Markdown file in <code>src/content/blog/</code> with YAML front matter. Supports tables, code blocks, task lists and $LaTeX$ math."
   }
 }
