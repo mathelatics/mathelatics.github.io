@@ -3,9 +3,42 @@
 const fs = require('fs');
 const path = require('path');
 
+const { renderMarkdown, parseFrontMatter } = require('./src/md');
+
 const ROOT = __dirname;
+const CONTENT = path.join(ROOT, 'src/content');
 const data = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/site-data.json'), 'utf8'));
-const { meta, nav, social, heroStats, about, research, publications, projects, talks, teaching, advocacy, cv, contact } = data;
+const { meta, nav, social, heroStats, research, publications, projects, talks, cv, contact, blog } = data;
+
+/* ---- Markdown content loaders ---- */
+function loadDir(sub) {
+  const dir = path.join(CONTENT, sub);
+  if (!fs.existsSync(dir)) return [];
+  return fs.readdirSync(dir).filter(f => f.endsWith('.md')).map(f => {
+    const raw = fs.readFileSync(path.join(dir, f), 'utf8');
+    const { fm, body } = parseFrontMatter(raw);
+    return { slug: f.replace(/\.md$/, ''), fm, html: renderMarkdown(body.trim()), body };
+  });
+}
+const aboutDoc = loadDir('about')[0] || { fm: {}, html: '<p>Add src/content/about/about.md</p>' };
+const posts = loadDir('blog').sort((a, b) => String(b.fm.date).localeCompare(String(a.fm.date)));
+const pubs = loadDir('publications').sort((a, b) => Number(b.fm.year) - Number(a.fm.year));
+const projs = loadDir('projects');
+const cvDoc = loadDir('cv')[0] || { fm: {}, html: '', body: '' };
+const fmtDate = (d) => { try { return new Date(d + 'T00:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }); } catch { return d; } };
+const readTime = (body) => Math.max(1, Math.round(body.split(/\s+/).length / 200)) + ' min read';
+
+/* ---- Tag index (blog posts + publications share one tag space) ---- */
+const slugifyTag = (t) => t.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+const parseTags = (s) => String(s || '').split(',').map(t => t.trim()).filter(Boolean);
+const tagIndex = {}; // key -> { name, posts: [], pubs: [] }
+for (const p of posts) for (const t of parseTags(p.fm.tags)) {
+  const k = slugifyTag(t); (tagIndex[k] ||= { name: t, posts: [], pubs: [] }).posts.push(p);
+}
+for (const pu of pubs) for (const t of parseTags(pu.fm.tags)) {
+  const k = slugifyTag(t); (tagIndex[k] ||= { name: t, posts: [], pubs: [] }).pubs.push(pu);
+}
+const tagKeys = Object.keys(tagIndex).sort();
 
 const ICONS = {
   github: '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.55v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.16 1.18a11 11 0 0 1 5.76 0c2.2-1.49 3.16-1.18 3.16-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.66.41.36.78 1.06.78 2.14v3.17c0 .31.21.66.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>',
@@ -26,21 +59,17 @@ const ICONS = {
   quote: '<svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M10 8H6a4 4 0 0 0-4 4v6h8v-6H6a2 2 0 0 1 2-2h2V8zm10 0h-4a4 4 0 0 0-4 4v6h8v-6h-2a2 2 0 0 1 2-2h2V8z"/></svg>'
 };
 
+/* Shared head bits for every page */
+const THEME_HEAD = `  <script>(function(){try{var t=localStorage.getItem('qm-theme');if(!t)t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>\n`;
+const TOGGLE_BTN = `<button class="theme-toggle" id="theme-toggle" aria-label="Toggle color theme" title="Toggle light / dark theme"><span class="icon-moon" aria-hidden="true">🌙</span><span class="icon-sun" aria-hidden="true">☀️</span></button>`;
+
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 const socialLinks = social.map(s => `<a class="social-btn" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(s.name)}" title="${esc(s.name)}">${ICONS[s.icon] || ''}</a>`).join('\n          ');
 
-const navHtml = nav.map(n => `<a class="nav-link" href="#${n.id}">${esc(n.label)}</a>`).join('\n          ');
+const navHtml = nav.map(n => `<a class="nav-link" href="${esc(n.href || '#' + n.id)}"${(n.href||'').startsWith(n.id) ? '' : ''}>${esc(n.label)}</a>`).join('\n          ');
 
 const statsHtml = heroStats.map(s => `<div class="stat"><span class="stat-value" data-count="${esc(s.value)}">${esc(s.value)}</span><span class="stat-label">${esc(s.label)}</span></div>`).join('\n            ');
-
-const focusTags = about.focusTags.map(t => `<span class="chip">${esc(t)}</span>`).join('');
-
-const highlights = about.highlights.map(h => `
-        <div class="highlight-card reveal">
-          <div class="highlight-icon">${ICONS[h.icon]}</div>
-          <div><h3>${esc(h.title)}</h3><p>${esc(h.text)}</p></div>
-        </div>`).join('');
 
 const researchCards = research.areas.map(a => `
         <article class="research-card reveal" style="--accent:${a.accent}">
@@ -50,26 +79,34 @@ const researchCards = research.areas.map(a => `
           <div class="tag-row">${a.tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
         </article>`).join('');
 
-const pubItems = publications.list.map(p => `
+const pubItems = pubs.map(p => `
         <li class="pub reveal">
-          <div class="pub-year">${p.year}</div>
-          <div class="pub-body">
-            <h3 class="pub-title">${esc(p.title)}</h3>
-            <p class="pub-authors">${esc(p.authors)}</p>
-            <p class="pub-venue"><em>${esc(p.venue)}</em>${p.doi ? ` · <a href="https://doi.org/${esc(p.doi)}" target="_blank" rel="noopener">doi:${esc(p.doi)}</a>` : ''}</p>
-            <div class="tag-row">
-              ${p.tags.map(t => `<span class="tag tag-sm">${esc(t)}</span>`).join('')}
-              <span class="cite-badge" title="Citations">▲ ${p.cite} citations</span>
-            </div>
-          </div>
+          <details>
+            <summary>
+              <span class="pub-year">${esc(p.fm.year)}</span>
+              <div class="pub-body">
+                <h3 class="pub-title">${esc(p.fm.title)}</h3>
+                <p class="pub-authors">${esc(p.fm.authors)}</p>
+                <p class="pub-venue"><em>${esc(p.fm.venue)}</em>${p.fm.doi ? ` · <a href=\"https://doi.org/${esc(p.fm.doi)}\" target=\"_blank\" rel=\"noopener\" onclick=\"event.stopPropagation();\">doi:${esc(p.fm.doi)}</a>` : ''}</p>
+                <div class="tag-row">
+                  ${parseTags(p.fm.tags).map(t => `<a class="tag tag-sm" href="tags/${slugifyTag(t)}.html">#${esc(t)}</a>`).join('')}
+                  <span class="cite-badge" title="Citations">▲ ${esc(p.fm.citations)} citations</span>
+                  <span class="pub-toggle">▾ abstract</span>
+                </div>
+              </div>
+            </summary>
+            <div class="md-body pub-abstract">${p.html}</div>
+          </details>
         </li>`).join('');
 
-const projectCards = projects.list.map(pr => `
-        <a class="project-card reveal" href="${esc(pr.url)}" target="_blank" rel="noopener noreferrer">
-          <div class="project-top"><h3>${esc(pr.name)}</h3><span class="badge">${esc(pr.badge)}</span></div>
-          <p>${esc(pr.desc)}</p>
-          <div class="project-meta"><span>${esc(pr.lang)}</span><span class="stars">${ICONS.star} ${esc(pr.stars)}</span></div>
-        </a>`).join('');
+const projectCards = projs.map(pr => `
+        <article class="project-card reveal">
+          <a class="project-link" href="${esc(pr.fm.url)}" target="_blank" rel="noopener noreferrer"><h3>${esc(pr.fm.name)}</h3></a>
+          <div class="project-top"><span class="badge">${esc(pr.fm.badge)}</span></div>
+          <p class="project-tagline">${esc(pr.fm.tagline)}</p>
+          <div class="md-body project-desc">${pr.html}</div>
+          <div class="project-meta"><span>${esc(pr.fm.lang)}</span><span class="stars">${ICONS.star} ${esc(pr.fm.stars)}</span></div>
+        </article>`).join('');
 
 const talkItems = talks.list.map(t => `
         <li class="talk reveal">
@@ -77,21 +114,6 @@ const talkItems = talks.list.map(t => `
           <div><strong>${esc(t.title)}</strong><span class="talk-where"> — ${esc(t.where)}</span></div>
           <span class="talk-type type-${t.type}">${esc(t.type)}</span>
         </li>`).join('');
-
-const courseCards = teaching.courses.map(c => `
-        <article class="course-card reveal">
-          <div class="course-code">${esc(c.code)}</div>
-          <h3>${esc(c.title)}</h3>
-          <p class="course-term">${esc(c.term)} · ${esc(c.level)}</p>
-          <p>${esc(c.desc)}</p>
-          ${c.rating ? `<p class="course-rating">★ ${esc(c.rating)}</p>` : ''}
-        </article>`).join('');
-
-const advocacyItems = advocacy.items.map(a => `
-        <div class="advocacy-item reveal">
-          <div class="advocacy-icon">${ICONS[a.icon]}</div>
-          <div><h3>${esc(a.title)}</h3><p>${esc(a.text)}</p></div>
-        </div>`).join('');
 
 const positionItems = cv.positions.map(p => `
         <li class="timeline-item reveal">
@@ -101,6 +123,21 @@ const positionItems = cv.positions.map(p => `
 
 const awardItems = cv.awards.map(a => `<li class="reveal"><span class="award-year">${esc(a.year)}</span> ${esc(a.name)}</li>`).join('');
 const serviceItems = cv.service.map(s => `<li>${esc(s)}</li>`).join('');
+
+/* ---- Tag helpers ---- */
+const tagChipsForPost = (p, prefix) => parseTags(p.fm.tags).map(t =>
+  `<a class="tag tag-sm" href="${prefix}tags/${slugifyTag(t)}.html">#${esc(t)}</a>`).join('');
+const tagCloud = (prefix, activeKey) => `<div class="tag-cloud">${tagKeys.map(k =>
+  `          <a class="tag-chip${k === activeKey ? ' active' : ''}" href="${prefix}tags/${k}.html">#${esc(tagIndex[k].name)}<span class="tag-count">${tagIndex[k].posts.length + tagIndex[k].pubs.length}</span></a>`).join('\n')}\n        </div>`;
+
+/* Shared publication list renderer (homepage + tag pages) */
+function pubListHtml(list) {
+  return `\n        <h2 class="cv-subtitle"><span class="hash">#</span> Publications</h2>\n        <ol class="pub-list">\n${list.map(pu => `          <li class="pub reveal">\n            <details>\n              <summary>\n                <span class="pub-year">${esc(pu.fm.year)}</span>\n                <div class="pub-body">\n                  <h3 class="pub-title">${esc(pu.fm.title)}</h3>\n                  <p class="pub-authors">${esc(pu.fm.authors)}</p>\n                  <p class="pub-venue"><em>${esc(pu.fm.venue)}</em>${pu.fm.doi ? ` · <a href=\"https://doi.org/${esc(pu.fm.doi)}\" target=\"_blank\" rel=\"noopener\" onclick=\"event.stopPropagation();\">doi:${esc(pu.fm.doi)}</a>` : ''}</p>\n                  <span class="pub-toggle">▾ abstract</span>\n                </div>\n              </summary>\n              <div class=\"md-body pub-abstract\">${pu.html}</div>\n            </details>\n          </li>`).join('\n')}\n        </ol>`;
+}
+
+/* Homepage nav uses in-page anchors; sub-pages use full hrefs via pageShell */
+const pageLinks = { about: 'about.html', blog: 'blog.html', cv: 'cv.html' };
+const navHtmlHome = nav.map(n => `<a class="nav-link" href="${pageLinks[n.id] || '#' + n.id}">${esc(n.label)}</a>`).join('\n          ');
 
 const html = `<!DOCTYPE html>
 <html lang="en">
@@ -113,7 +150,7 @@ const html = `<!DOCTYPE html>
   <meta property="og:description" content="${esc(meta.description)}" />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0b0e1a" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚛️</text></svg>" />
+${THEME_HEAD}  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚛️</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
@@ -127,8 +164,9 @@ const html = `<!DOCTYPE html>
     <nav class="nav-container" aria-label="Primary">
       <a class="brand" href="#top"><span class="brand-atom" aria-hidden="true">⚛</span> <span class="brand-name">${esc(meta.title)}</span></a>
       <div class="nav-links" id="nav-links">
-          ${navHtml}
+          ${navHtmlHome}
       </div>
+      ${TOGGLE_BTN}
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
     </nav>
   </header>
@@ -156,15 +194,12 @@ const html = `<!DOCTYPE html>
       <div class="scroll-hint" aria-hidden="true">▾</div>
     </section>
 
-    <!-- ABOUT -->
+    <!-- ABOUT (teaser — full text lives in src/content/about/about.md) -->
     <section class="section" id="about">
       <div class="section-inner">
         <h2 class="section-title"><span class="hash">#</span> About</h2>
-        <p class="about-lead">${esc(about.lead)}</p>
-        ${about.paragraphs.map(p => `<p class="about-p">${p}</p>`).join('\n        ')}
-        <div class="tag-row chip-row">${focusTags}</div>
-        <div class="highlights-grid">${highlights}
-        </div>
+        <p class="about-lead">${esc(aboutDoc.fm.lead || '')}</p>
+        <a class="btn btn-ghost" href="about.html">Read my full story →</a>
       </div>
     </section>
 
@@ -182,7 +217,7 @@ const html = `<!DOCTYPE html>
     <section class="section" id="publications">
       <div class="section-inner">
         <h2 class="section-title"><span class="hash">#</span> Selected Publications</h2>
-        <p class="section-intro">${esc(publications.note)} · <a href="https://scholar.google.com/" target="_blank" rel="noopener">Full list on Google Scholar →</a></p>
+        <p class="section-intro">${publications.intro} · <a href="${esc(publications.scholarUrl)}" target="_blank" rel="noopener">Full list on Google Scholar →</a></p>
         <ol class="pub-list">${pubItems}
         </ol>
       </div>
@@ -198,6 +233,24 @@ const html = `<!DOCTYPE html>
       </div>
     </section>
 
+    <!-- BLOG (preview cards — posts live in src/content/blog/*.md) -->
+    <section class="section" id="blog">
+      <div class="section-inner">
+        <h2 class="section-title rainbow-text"><span class="hash">#</span> Latest Writing</h2>
+        <p class="section-intro">${blog.intro}</p>
+        <div class="tag-cloud" style="justify-content:center">${tagKeys.map(k => `<a class="tag-chip" href="tags/${k}.html">#${esc(tagIndex[k].name)}<span class="tag-count">${tagIndex[k].posts.length + tagIndex[k].pubs.length}</span></a>`).join('')}</div>
+        <div class="blog-grid">${posts.slice(0, 3).map(p => `
+          <article class="blog-card reveal">
+            <a class="blog-card-link" href="blog/${p.slug}.html"><h3>${esc(p.fm.title)}</h3></a>
+            <p class="blog-meta">${fmtDate(p.fm.date)} · ${readTime(p.body)}</p>
+            <p class="blog-summary">${esc(p.fm.summary || '')}</p>
+            <div class="tag-row">${tagChipsForPost(p, '')}</div>
+          </article>`).join('')}
+        </div>
+        <p class="see-all"><a class="btn btn-ghost" href="blog.html">All blog posts →</a></p>
+      </div>
+    </section>
+
     <!-- TALKS -->
     <section class="section" id="talks">
       <div class="section-inner">
@@ -207,45 +260,19 @@ const html = `<!DOCTYPE html>
       </div>
     </section>
 
-    <!-- TEACHING -->
-    <section class="section section-alt" id="teaching">
-      <div class="section-inner">
-        <h2 class="section-title"><span class="hash">#</span> Teaching &amp; Mentoring</h2>
-        <p class="section-intro">${esc(teaching.intro)}</p>
-        <div class="course-grid">${courseCards}
-        </div>
-        <p class="mentoring-note reveal">🎓 ${esc(teaching.mentoring)}</p>
-      </div>
-    </section>
-
-    <!-- ADVOCACY -->
-    <section class="section advocacy" id="advocacy">
-      <div class="section-inner">
-        <h2 class="section-title rainbow-text"><span class="hash">#</span> LGBTQ+ Advocacy &amp; Community</h2>
-        <p class="section-intro advocacy-lead">${esc(advocacy.lead)}</p>
-        <div class="advocacy-grid">${advocacyItems}
-        </div>
-        <blockquote class="pull-quote reveal">${ICONS.quote}<p>${esc(advocacy.quote)}</p></blockquote>
-      </div>
-    </section>
-
-    <!-- CV -->
+    <!-- CV (teaser — full CV lives on cv.html, generated from src/content/cv/cv.md) -->
     <section class="section section-alt" id="cv">
       <div class="section-inner">
         <h2 class="section-title"><span class="hash">#</span> Curriculum Vitae</h2>
-        <div class="cv-grid">
-          <div>
-            <h3 class="cv-subtitle">Appointments</h3>
-            <ul class="timeline">${positionItems}
-            </ul>
-          </div>
-          <div class="cv-side">
-            <h3 class="cv-subtitle">Honors &amp; Awards</h3>
-            <ul class="award-list">${awardItems}</ul>
-            <h3 class="cv-subtitle">Professional Service</h3>
-            <ul class="service-list">${serviceItems}</ul>
-            <a class="btn btn-ghost btn-block" href="#" onclick="alert('PDF download placeholder — drop cv.pdf into /public and point this link at it.');return false;">⬇ Download full CV (PDF)</a>
-          </div>
+        <p class="section-intro">Appointments, education, honors, invited teaching &amp; mentoring, and professional service — all on one page. Written in Markdown at <code>src/content/cv/cv.md</code>.</p>
+        <div class="cv-teaser reveal">
+          <div class="cv-teaser-item"><span class="cv-num">${String(cvDoc.fm.years || '15+')}</span><span class="cv-cap">years in research &amp; teaching</span></div>
+          <div class="cv-teaser-item"><span class="cv-num">${String(cvDoc.fm.students || '30+')}</span><span class="cv-cap">students mentored</span></div>
+          <div class="cv-teaser-item"><span class="cv-num">${String(cvDoc.fm.awards || cv.awards.length)}</span><span class="cv-cap">major honors &amp; awards</span></div>
+        </div>
+        <div class="cv-actions">
+          <a class="btn btn-primary" href="cv.html">View full CV →</a>
+          <a class="btn btn-ghost" href="${esc(cv.pdf)}" download>⬇ Download PDF</a>
         </div>
       </div>
     </section>
@@ -277,10 +304,193 @@ const html = `<!DOCTYPE html>
     <p class="footer-sub">Inspired by <a href="https://gitlab.com/ian-s-mcb/smigle-hugo-theme" target="_blank" rel="noopener">Smigle</a> · Deployed on GitHub Pages</p>
   </footer>
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
 `;
 
+fs.mkdirSync(path.join(ROOT, 'public'), { recursive: true });
+
 fs.writeFileSync(path.join(ROOT, 'public/index.html'), html);
 console.log('✓ public/index.html written (' + html.length + ' bytes)');
+
+/* ================= Sub-pages (Markdown-driven) ================= */
+const BASE = ''; // adjust if serving from project subdir; relative paths used instead
+
+function pageShell({ title, desc, contentClass, main, prefix }) {
+  const p = prefix || '';
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>${esc(title)} — ${esc(meta.title)}</title>
+  <meta name="description" content="${esc(desc)}" />
+  <meta property="og:title" content="${esc(title)}" />
+  <meta property="og:description" content="${esc(desc)}" />
+  <meta name="theme-color" content="#0b0e1a" />
+${THEME_HEAD}  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚛️</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="${p}styles/main.css" />
+</head>
+<body class="subpage">
+  <canvas id="quantum-canvas" aria-hidden="true"></canvas>
+  <div class="rainbow-bar" aria-hidden="true"></div>
+  <header class="site-header">
+    <nav class="nav-container" aria-label="Primary">
+      <a class="brand" href="${p}index.html"><span class="brand-atom" aria-hidden="true">⚛</span> <span class="brand-name">${esc(meta.title)}</span></a>
+      <div class="nav-links" id="nav-links">
+          ${nav.map(n => `<a class="nav-link" href="${esc(p + (n.href || '#' + n.id))}">${esc(n.label)}</a>`).join('\n          ')}
+      </div>
+      ${TOGGLE_BTN}
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+  <main class="${contentClass}">
+${main}
+  </main>
+  <footer class="site-footer">
+    <div class="footer-rainbow" aria-hidden="true"></div>
+    <p>© 2026 ${esc(meta.title)} · Built with ♥ and open science</p>
+    <p class="footer-sub"><a href="${p}index.html">← Home</a> · Inspired by <a href="https://gitlab.com/ian-s-mcb/smigle-hugo-theme" target="_blank" rel="noopener">Smigle</a> · Deployed on GitHub Pages</p>
+  </footer>
+  <script src="${p}js/app.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</body>
+</html>
+`;
+}
+
+function writePage(rel, str) {
+  const file = path.join(ROOT, 'public', rel);
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  fs.writeFileSync(file, str);
+  console.log('✓ public/' + rel + ' written (' + str.length + ' bytes)');
+}
+
+/* ---- About page ---- */
+writePage('about.html', pageShell({
+  title: aboutDoc.fm.title || 'About',
+  desc: aboutDoc.fm.lead || meta.description,
+  contentClass: 'page-main',
+  main: `    <section class="page-section">
+      <div class="section-inner narrow">
+        <h1 class="page-title gradient-text">${esc(aboutDoc.fm.title || 'About')}</h1>
+        <p class="about-lead">${esc(aboutDoc.fm.lead || '')}</p>
+        <div class="md-body">${aboutDoc.html}
+          <p class="page-crosslinks"><a class="btn btn-ghost" href="cv.html">📄 Curriculum Vitae (full CV page) →</a></p>
+        </div>
+      </div>
+    </section>`
+}));
+
+/* ---- CV page (Markdown-driven: src/content/cv/cv.md + structured data) ---- */
+writePage('cv.html', pageShell({
+  title: cvDoc.fm.title || 'Curriculum Vitae',
+  desc: cvDoc.fm.lead || 'Full academic CV — appointments, education, teaching, mentoring, honors, and service.',
+  contentClass: 'page-main',
+  main: `    <section class="page-section">
+      <div class="section-inner">
+        <h1 class="page-title gradient-text">${esc(cvDoc.fm.title || 'Curriculum Vitae')}</h1>
+        <p class="about-lead">${esc(cvDoc.fm.lead || '')}</p>
+        <div class="cv-actions">
+          <a class="btn btn-primary" href="${esc(cv.pdf)}" download>⬇ Download PDF</a>
+          <span class="cv-updated">Updated ${esc(meta.updated)}</span>
+        </div>
+
+        <div class="cv-grid">
+          <div>
+            <h2 class="cv-subtitle"><span class="hash">#</span> Appointments</h2>
+            <ul class="timeline">${positionItems}
+            </ul>
+          </div>
+          <div class="cv-side">
+            <h2 class="cv-subtitle"><span class="hash">#</span> Honors &amp; Awards</h2>
+            <ul class="award-list">${awardItems}</ul>
+            <h2 class="cv-subtitle"><span class="hash">#</span> Professional Service</h2>
+            <ul class="service-list">${serviceItems}</ul>
+          </div>
+        </div>
+
+        ${cvDoc.html ? `<div class="cv-md md-body">${cvDoc.html}</div>` : ''}
+      </div>
+    </section>`
+}));
+
+/* ---- Blog index ---- */
+writePage('blog.html', pageShell({
+  title: 'Blog',
+  desc: 'Writing on quantum science, queer academia, and open research.',
+  contentClass: 'page-main',
+  main: `    <section class="page-section">
+      <div class="section-inner">
+        <h1 class="page-title rainbow-text">Blog</h1>
+        <p class="section-intro">${blog.intro}</p>
+        <h2 class="cv-subtitle"><span class="hash">#</span> Browse by tag</h2>
+        ${tagCloud('')}
+        <div class="blog-grid">
+${posts.map(p => `          <article class="blog-card reveal">
+            <a class="blog-card-link" href="blog/${p.slug}.html"><h3>${esc(p.fm.title)}</h3></a>
+            <p class="blog-meta">📅 ${fmtDate(p.fm.date)} · ⏱ ${readTime(p.body)}</p>
+            <p class="blog-summary">${esc(p.fm.summary || '')}</p>
+            <div class="tag-row">${tagChipsForPost(p, '')}</div>
+          </article>`).join('\n')}
+        </div>
+      </div>
+    </section>`
+}));
+
+/* ---- Individual blog posts ---- */
+for (const p of posts) {
+  const idx = posts.indexOf(p);
+  const prev = posts[idx + 1], next = posts[idx - 1];
+  writePage(`blog/${p.slug}.html`, pageShell({
+    title: p.fm.title,
+    desc: p.fm.summary || p.fm.title,
+    prefix: '../',
+    contentClass: 'page-main post-page',
+    main: `    <article class="post">
+      <div class="section-inner narrow">
+        <p class="blog-meta">📅 ${fmtDate(p.fm.date)} · ⏱ ${readTime(p.body)}</p>
+        <div class="tag-row post-tags-inline">${tagChipsForPost(p, '../')}</div>
+        <h1 class="page-title">${esc(p.fm.title)}</h1>
+        <div class="md-body post-body katex">${p.html}</div>
+        <hr />
+        <nav class="post-nav" aria-label="Post navigation">
+          ${next ? `<a class="btn btn-ghost" href="../blog/${next.slug}.html">← ${esc(next.fm.title)}</a>` : '<span></span>'}
+          ${prev ? `<a class="btn btn-ghost" href="../blog/${prev.slug}.html">${esc(prev.fm.title)} →</a>` : '<a class="btn btn-ghost" href="../blog.html">All posts</a>'}
+        </nav>
+      </div>
+    </article>`
+  }));
+}
+
+/* ---- Tag filter pages (public/tags/<slug>.html) — posts + publications per tag ---- */
+for (const k of tagKeys) {
+  const t = tagIndex[k];
+  const total = t.posts.length + t.pubs.length;
+  writePage(`tags/${k}.html`, pageShell({
+    title: `#${t.name}`,
+    desc: `Writing and papers tagged “${t.name}” on ${meta.title}'s portfolio.`,
+    prefix: '../',
+    contentClass: 'page-main',
+    main: `    <section class="page-section">
+      <div class="section-inner">
+        <p class="tag-hero-kicker"><a href="../index.html#blog">Portfolio</a> / <a href="../blog.html">Blog</a> / Tags</p>
+        <h1 class="page-title gradient-text tag-hero-title">#${esc(t.name)}</h1>
+        <p class="tag-hero-count">${total} item${total === 1 ? '' : 's'} — ${t.posts.length} post${t.posts.length === 1 ? '' : 's'} · ${t.pubs.length} publication${t.pubs.length === 1 ? '' : 's'}</p>
+        ${tagCloud('../', k)}
+        ${t.posts.length ? `<h2 class="cv-subtitle"><span class="hash">#</span> Writing</h2>\n        <div class="blog-grid">\n${t.posts.map(p => `          <article class="blog-card reveal">\n            <a class="blog-card-link" href="../blog/${p.slug}.html"><h3>${esc(p.fm.title)}</h3></a>\n            <p class="blog-meta">📅 ${fmtDate(p.fm.date)} · ⏱ ${readTime(p.body)}</p>\n            <p class="blog-summary">${esc(p.fm.summary || '')}</p>\n            <div class="tag-row">${tagChipsForPost(p, '../')}</div>\n          </article>`).join('\n')}\n        </div>` : ''}
+        ${t.pubs.length ? pubListHtml(t.pubs) : ''}
+        <p class="see-all"><a class="btn btn-ghost" href="../blog.html">← All blog posts</a></p>
+      </div>
+    </section>`
+  }));
+}

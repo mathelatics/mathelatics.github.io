@@ -87,6 +87,35 @@
   window.addEventListener('pointerleave', () => { mouse.x = -9999; mouse.y = -9999; });
   initCanvas();
 
+  /* ---------- Theme toggle ("observer chooses the basis") ---------- */
+  const DARK_COLORS = COLORS.slice();
+  const LIGHT_COLORS = ['#6d4aff', '#0891b2', '#e0447c', '#059669', '#b45309'];
+  function applyTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    const link = document.querySelector('meta[name="theme-color"]');
+    if (link) link.setAttribute('content', t === 'light' ? '#f4f6fc' : '#0b0e1a');
+    const from = t === 'light' ? DARK_COLORS : LIGHT_COLORS;
+    const to = t === 'light' ? LIGHT_COLORS : DARK_COLORS;
+    for (const pt of particles) {
+      const i = Math.max(0, from.indexOf(pt.c));
+      pt.c = to[i % to.length];
+    }
+    if (prefersReduced && particles.length) { // repaint static frame
+      ctx.clearRect(0, 0, W, H);
+      for (const p of particles) { ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283); ctx.fillStyle = p.c; ctx.globalAlpha = .5; ctx.fill(); }
+      ctx.globalAlpha = 1;
+    }
+  }
+  const toggleBtn = document.getElementById('theme-toggle');
+  if (toggleBtn) {
+    applyTheme(document.documentElement.getAttribute('data-theme') || 'dark');
+    toggleBtn.addEventListener('click', () => {
+      const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      try { localStorage.setItem('qm-theme', next); } catch (e) {}
+      applyTheme(next);
+    });
+  }
+
   /* ---------- Scroll reveal ---------- */
   const io = new IntersectionObserver((entries) => {
     entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('visible'); io.unobserve(en.target); } });

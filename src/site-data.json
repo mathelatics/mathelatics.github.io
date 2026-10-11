@@ -13,147 +13,260 @@
     "updated": "October 2026"
   },
   "nav": [
-    { "id": "about", "label": "About" },
-    { "id": "research", "label": "Research" },
-    { "id": "publications", "label": "Publications" },
-    { "id": "projects", "label": "Projects" },
-    { "id": "talks", "label": "Talks" },
-    { "id": "teaching", "label": "Teaching" },
-    { "id": "advocacy", "label": "Advocacy" },
-    { "id": "cv", "label": "CV" },
-    { "id": "contact", "label": "Contact" }
+    {
+      "id": "about",
+      "label": "About",
+      "href": "about.html"
+    },
+    {
+      "id": "research",
+      "label": "Research",
+      "href": "index.html#research"
+    },
+    {
+      "id": "publications",
+      "label": "Publications",
+      "href": "index.html#publications"
+    },
+    {
+      "id": "projects",
+      "label": "Projects",
+      "href": "index.html#projects"
+    },
+    {
+      "id": "blog",
+      "label": "Blog",
+      "href": "blog.html"
+    },
+    {
+      "id": "talks",
+      "label": "Talks",
+      "href": "index.html#talks"
+    },
+    {
+      "id": "cv",
+      "label": "CV",
+      "href": "cv.html"
+    },
+    {
+      "id": "contact",
+      "label": "Contact",
+      "href": "index.html#contact"
+    }
   ],
   "social": [
-    { "name": "GitHub", "url": "https://github.com/mathelatics", "icon": "github" },
-    { "name": "Google Scholar", "url": "https://scholar.google.com/", "icon": "scholar" },
-    { "name": "ORCID", "url": "https://orcid.org/0000-0002-1825-0097", "icon": "orcid" },
-    { "name": "LinkedIn", "url": "https://www.linkedin.com/", "icon": "linkedin" },
-    { "name": "Mastodon", "url": "https://mastodon.social/", "icon": "mastodon" },
-    { "name": "Email", "url": "mailto:alex.rivera@cornell.example.edu", "icon": "mail" }
+    {
+      "name": "GitHub",
+      "url": "https://github.com/mathelatics",
+      "icon": "github"
+    },
+    {
+      "name": "Google Scholar",
+      "url": "https://scholar.google.com/",
+      "icon": "scholar"
+    },
+    {
+      "name": "ORCID",
+      "url": "https://orcid.org/0000-0002-1825-0097",
+      "icon": "orcid"
+    },
+    {
+      "name": "LinkedIn",
+      "url": "https://www.linkedin.com/",
+      "icon": "linkedin"
+    },
+    {
+      "name": "Mastodon",
+      "url": "https://mastodon.social/",
+      "icon": "mastodon"
+    },
+    {
+      "name": "Email",
+      "url": "mailto:alex.rivera@cornell.example.edu",
+      "icon": "mail"
+    }
   ],
   "heroStats": [
-    { "value": "23", "label": "Peer-reviewed papers" },
-    { "value": "1.4k+", "label": "Citations · h-index 19" },
-    { "value": "6", "label": "Open-source projects" },
-    { "value": "40+", "label": "Invited talks & outreach" }
+    {
+      "value": "23",
+      "label": "Peer-reviewed papers"
+    },
+    {
+      "value": "1.4k+",
+      "label": "Citations · h-index 19"
+    },
+    {
+      "value": "6",
+      "label": "Open-source projects"
+    },
+    {
+      "value": "40+",
+      "label": "Invited talks & outreach"
+    }
   ],
-  "about": {
-    "lead": "I decode noise into knowledge.",
-    "paragraphs": [
-      "I am a quantum information scientist working at the intersection of <strong>superconducting qubits</strong>, <strong>quantum error correction</strong>, and <strong>open scientific software</strong>. My group's mission: make fault-tolerant quantum computing real — and make the path into quantum science welcoming for everyone, especially LGBTQ+ and underrepresented folks who too often get measured out of the wavefunction.",
-      "As an openly queer, nonbinary-leaning (she/they) academic, I believe representation is a form of error correction for the scientific community: it catches the bit-flips of bias before they propagate through a career. I mentor queer STEM students, review for inclusive hiring, and build tools that lower the barrier to entry into quantum research."
-    ],
-    "focusTags": ["Quantum Error Correction", "Superconducting Circuits", "Quantum ML", "Open Source", "Science Policy", "DEI in STEM"],
-    "highlights": [
-      { "icon": "lab", "title": "Currently", "text": "Building a surface-code simulator (QubitForge) and running logical-qubit benchmarks on a 127-node transmon processor." },
-      { "icon": "award", "title": "Recognition", "text": "NSF CAREER Award (2024) · QuTech Best Paper (2023) · Cornell LGBTQ+ Faculty Mentor of the Year (2025)." },
-      { "icon": "globe", "title": "Community", "text": "Co-founder of QueerQuantum — a global network of 500+ LGBTQ+ quantum scientists and allies." }
-    ]
-  },
   "research": {
     "intro": "My research treats coherence as both a physical resource and a human one. Five active thrusts:",
     "areas": [
       {
         "title": "Fault-Tolerant Architectures",
         "desc": "Surface & color codes, lattice surgery, and magic-state distillation with realistic noise models. Goal: reduce the overhead from logical qubit to useful circuit by 10×.",
-        "tags": ["Surface Codes", "Lattice Surgery", "Threshold Theorems"],
+        "tags": [
+          "Surface Codes",
+          "Lattice Surgery",
+          "Threshold Theorems"
+        ],
         "accent": "#7c5cff"
       },
       {
         "title": "Superconducting Qubit Hardware",
         "desc": "Transmon design, 3D cavities, and parametric couplers. We chase T1/T2 beyond 500 µs while keeping fabrication yield above 90%.",
-        "tags": ["Transmons", "Circuit QED", "Cryogenics"],
+        "tags": [
+          "Transmons",
+          "Circuit QED",
+          "Cryogenics"
+        ],
         "accent": "#ff5c8a"
       },
       {
         "title": "Quantum Machine Learning",
         "desc": "Barren-plateau avoidance, quantum kernels for materials discovery, and NISCA-era hybrid pipelines that actually beat classical baselines.",
-        "tags": ["Variational Algorithms", "Quantum Kernels", "Hybrid Pipelines"],
+        "tags": [
+          "Variational Algorithms",
+          "Quantum Kernels",
+          "Hybrid Pipelines"
+        ],
         "accent": "#22d3ee"
       },
       {
         "title": "Open Quantum Software",
         "desc": "Maintainer tooling for reproducible experiments: calibration daemons, schema'd pulse schedules, and simulation backends anyone can audit.",
-        "tags": ["Reproducibility", "Python", "CUDA"],
+        "tags": [
+          "Reproducibility",
+          "Python",
+          "CUDA"
+        ],
         "accent": "#34d399"
       },
       {
         "title": "Ethics, Policy & Inclusion in Quantum",
         "desc": "Quantum technology governance, export-control equity, and workforce studies on LGBTQ+ retention in physics departments.",
-        "tags": ["Policy", "Workforce Studies", "Ethics"],
+        "tags": [
+          "Policy",
+          "Workforce Studies",
+          "Ethics"
+        ],
         "accent": "#fbbf24"
       }
     ]
   },
   "publications": {
-    "note": "Selected publications — full list on Google Scholar. (* = equal contribution, † = corresponding)",
-    "list": [
-      { "year": 2026, "title": "Logical-time crystalline order on a noisy superconducting quantum processor", "authors": "A. Rivera*, J. Okafor*, M. Lindqvist, S. Chen, D. Whitfield†", "venue": "Nature Physics", "type": "journal", "doi": "10.1038/s41567-026-0012-3", "cite": 42, "tags": ["Experiment", "Error Correction"] },
-      { "year": 2025, "title": "QubitForge: a GPU-accelerated stabilizer simulator with differentiable noise channels", "authors": "A. Rivera†, L. Park, T. Alvarez", "venue": "PRX Quantum 6, 020345", "type": "journal", "doi": "10.1103/PRXQuantum.6.020345", "cite": 118, "tags": ["Software", "Open Source"] },
-      { "year": 2025, "title": "Rainbow metrics: auditing inclusion outcomes in quantum workforce programs", "authors": "K. Nguyen, A. Rivera", "venue": "Physical Review Physics Education Research 20", "type": "journal", "doi": "10.1103/PhysRevPhysEducRes.20.010123", "cite": 27, "tags": ["DEI", "Education"] },
-      { "year": 2024, "title": "Low-overhead magic-state cultivation with twisted bilayer decoders", "authors": "S. Chen, A. Rivera, M. Lindqvist", "venue": "Quantum 8, 1402", "type": "journal", "doi": "10.22331/q-2024-08-14-1402", "cite": 96, "tags": ["Theory", "Magic States"] },
-      { "year": 2024, "title": "Calibration-as-code: reproducible experiment control for transmon arrays", "authors": "T. Alvarez, R. Iyer, A. Rivera†", "venue": "npj Quantum Information 10", "type": "journal", "doi": "10.1038/s41534-024-00812-x", "cite": 61, "tags": ["Software", "Experiment"] },
-      { "year": 2023, "title": "Quantum kernel methods for high-entropy alloy screening at NISQ scale", "authors": "L. Park, A. Rivera, H. Yamada", "venue": "Quantum Science and Technology 8(4)", "type": "journal", "doi": "10.1088/2058-9565/acf3b1", "cite": 143, "tags": ["Quantum ML", "Materials"] },
-      { "year": 2023, "title": "Measurement-free fault tolerance with coherent feedback", "authors": "D. Whitfield, A. Rivera", "venue": "PRL 131, 080601", "type": "journal", "doi": "10.1103/PhysRevLett.131.080601", "cite": 205, "tags": ["Theory", "Best Paper"] },
-      { "year": 2022, "title": "QueerQuantum: building a global community for LGBTQ+ scientists in quantum tech", "authors": "A. Rivera†, Community Collective", "venue": "Bulletin of the APS (Forum on Education)", "type": "conf", "doi": "", "cite": 19, "tags": ["Community", "Invited"] }
-    ]
+    "intro": "Peer-reviewed papers written as Markdown in <code>src/content/publications/</code>. Each file has front matter (title, authors, venue, year, doi, tags, citations) and an abstract body — edit the <code>.md</code>, rebuild, done.",
+    "scholarUrl": "https://scholar.google.com/"
   },
   "projects": {
-    "intro": "Everything below is open source (or openly published). Star it, fork it, audit it — and PRs from queer devs get priority review. 🏳️‍🌈",
-    "list": [
-      { "name": "QubitForge", "desc": "GPU-accelerated stabilizer + state-vector simulator with differentiable noise channels. Powers 40+ papers.", "lang": "Python / CUDA", "stars": "3.1k", "badge": "Flagship", "url": "https://github.com/" },
-      { "name": "calib-daemon", "desc": "Always-on transmon calibration framework: drift detection, auto-rerun, and git-versioned calibration reports.", "lang": "Python", "stars": "640", "badge": "Tooling", "url": "https://github.com/" },
-      { "name": "qec-playbook", "desc": "Interactive textbook: 'Surface Codes for Humans' — runnable notebooks from Bloch sphere to lattice surgery.", "lang": "Jupyter / mdBook", "stars": "1.8k", "badge": "Education", "url": "https://github.com/" },
-      { "name": "rainbow-pulse", "desc": "Pulse-sequence designer with accessibility-first UI: screen-reader labels, colorblind-safe palettes, keyboard nav.", "lang": "TypeScript / WASM", "stars": "410", "badge": "Accessibility", "url": "https://github.com/" },
-      { "name": "queerquantum-site", "desc": "Community hub, mentorship matching, and job board for LGBTQ+ quantum scientists & allies.", "lang": "Hugo / JS", "stars": "180", "badge": "Community", "url": "https://github.com/" },
-      { "name": "noise-zoo", "desc": "Curated library of benchmarked noise models from real devices — because synthetic depolarizing noise lies.", "lang": "JSON / Python", "stars": "520", "badge": "Data", "url": "https://github.com/" }
-    ]
+    "intro": "Open-source work documented in Markdown under <code>src/content/projects/</code> — name, language, badge, stars and a full README-style description per project."
   },
   "talks": {
     "list": [
-      { "date": "Mar 2026", "title": "Coherence, Community, and Code: An Open Path to Fault Tolerance", "where": "TEDx Ithaca (Main stage)", "type": "keynote" },
-      { "date": "Jan 2026", "title": "Differentiable Decoders for Logical Qubits", "where": "QIP 2026, Newport Beach", "type": "contributed" },
-      { "date": "Oct 2025", "title": "Panel: Queer Joy as Scientific Method", "where": "APS March Meeting (invited session)", "type": "panel" },
-      { "date": "Jun 2025", "title": "Keynote — Who Gets to Do Quantum?", "where": "InclusiveSTEM Summit, Berlin", "type": "keynote" },
-      { "date": "Feb 2025", "title": "Calibration-as-Code in Production QPU Labs", "where": "IEEE ICQQ, Kyoto", "type": "invited" },
-      { "date": "Nov 2024", "title": "Surface Codes from Scratch — Tutorial", "where": "NeurIPS Quantum Workshop", "type": "tutorial" },
-      { "date": "Sep 2024", "title": "The Rainbow Wavefunction: Retention of LGBTQ+ Physicists", "where": "Cornell Colloquium", "type": "colloquium" }
+      {
+        "date": "Mar 2026",
+        "title": "Coherence, Community, and Code: An Open Path to Fault Tolerance",
+        "where": "TEDx Ithaca (Main stage)",
+        "type": "keynote"
+      },
+      {
+        "date": "Jan 2026",
+        "title": "Differentiable Decoders for Logical Qubits",
+        "where": "QIP 2026, Newport Beach",
+        "type": "contributed"
+      },
+      {
+        "date": "Oct 2025",
+        "title": "Panel: Queer Joy as Scientific Method",
+        "where": "APS March Meeting (invited session)",
+        "type": "panel"
+      },
+      {
+        "date": "Jun 2025",
+        "title": "Keynote — Who Gets to Do Quantum?",
+        "where": "InclusiveSTEM Summit, Berlin",
+        "type": "keynote"
+      },
+      {
+        "date": "Feb 2025",
+        "title": "Calibration-as-Code in Production QPU Labs",
+        "where": "IEEE ICQQ, Kyoto",
+        "type": "invited"
+      },
+      {
+        "date": "Nov 2024",
+        "title": "Surface Codes from Scratch — Tutorial",
+        "where": "NeurIPS Quantum Workshop",
+        "type": "tutorial"
+      },
+      {
+        "date": "Sep 2024",
+        "title": "The Rainbow Wavefunction: Retention of LGBTQ+ Physicists",
+        "where": "Cornell Colloquium",
+        "type": "colloquium"
+      }
     ]
   },
-  "teaching": {
-    "intro": "Teaching is applied error correction: repeated gentle feedback keeps every student's logical information intact.",
-    "courses": [
-      { "code": "PHYS 6610", "title": "Quantum Computation I", "term": "Fall 2024 – 2026", "level": "Graduate", "rating": "4.9 / 5.0 · 128 evals", "desc": "From qubits to surface codes with weekly lab simulations on real hardware." },
-      { "code": "INFO 4520", "title": "Quantum Information for Everyone", "term": "Spring 2025 – 2026", "level": "Undergraduate (no physics prereq!)", "desc": "A deliberately gatekeeping-free intro course; 40% of cohort identify as LGBTQ+ or first-gen.", "rating": "4.8 / 5.0 · 96 evals" },
-      { "code": "ENGRI 1285", "title": "First-Year Seminar: Noise & Signal in Science and Society", "term": "Fall 2025", "level": "First-year", "desc": "Uses quantum noise as a lens for misinformation, measurement bias, and belonging.", "rating": "5.0 / 5.0 · 31 evals" }
-    ],
-    "mentoring": "Mentored 14 PhD students (7 defended), 9 postdocs, and 30+ undergrads — 60% women, gender-minority, or LGBTQ+ scholars."
-  },
-  "advocacy": {
-    "lead": "Science is for all of us. Full stop.",
-    "items": [
-      { "icon": "flag", "title": "QueerQuantum Co-Founder", "text": "Built a 500+-member global network with mentorship circles, conference meet-ups, and an affirming job board." },
-      { "icon": "shield", "title": "Departmental Climate Council", "text": "Lead author of Cornell's first LGBTQ+ faculty & student climate report; drove pronoun-field adoption in university systems." },
-      { "icon": "book", "title": "Inclusive Curriculum Working Group", "text": "APS committee member rewriting quantum textbooks' examples, names, and problem sets to reflect real diversity." },
-      { "icon": "heart", "title": "Trans Healthcare & Career Fund", "text": "Raised $85k to cover transition-related care and conference travel for queer grad students." },
-      { "icon": "megaphone", "title": "Visibility & Media", "text": "Quilting, Nature Careers feature, NPR 'All Systems' interview — telling the story of an openly queer quantum scientist." }
-    ],
-    "quote": "“Representation is error correction for the scientific community.” — Dr. Rivera, TEDx Ithaca 2026"
-  },
   "cv": {
+    "pdf": "cv/CV-Alex-Rivera.pdf",
     "positions": [
-      { "role": "Associate Professor (tenured), Applied Physics & CS", "org": "Cornell University", "period": "2023 – present", "detail": "Quantum Systems Lab · NSF CAREER PI" },
-      { "role": "Assistant Professor of Applied Physics", "org": "Cornell University", "period": "2019 – 2023", "detail": "Junior Faculty awardee, College of Engineering" },
-      { "role": "Postdoctoral Fellow", "org": "QuTech, TU Delft", "period": "2016 – 2019", "detail": "DiVincenzo group · topological qubits program" },
-      { "role": "PhD, Physics", "org": "University of Maryland / JQI", "period": "2011 – 2016", "detail": "Thesis: decoherence-free control of transmon arrays" },
-      { "role": "BSc (Hons), Physics & Mathematics", "org": "University of Toronto", "period": "2007 – 2011", "detail": "Gold Medalist · Undergrad teaching award" }
+      {
+        "role": "Associate Professor (tenured), Applied Physics & CS",
+        "org": "Cornell University",
+        "period": "2023 – present",
+        "detail": "Quantum Systems Lab · NSF CAREER PI"
+      },
+      {
+        "role": "Assistant Professor of Applied Physics",
+        "org": "Cornell University",
+        "period": "2019 – 2023",
+        "detail": "Junior Faculty awardee, College of Engineering"
+      },
+      {
+        "role": "Postdoctoral Fellow",
+        "org": "QuTech, TU Delft",
+        "period": "2016 – 2019",
+        "detail": "DiVincenzo group · topological qubits program"
+      },
+      {
+        "role": "PhD, Physics",
+        "org": "University of Maryland / JQI",
+        "period": "2011 – 2016",
+        "detail": "Thesis: decoherence-free control of transmon arrays"
+      },
+      {
+        "role": "BSc (Hons), Physics & Mathematics",
+        "org": "University of Toronto",
+        "period": "2007 – 2011",
+        "detail": "Gold Medalist · Undergrad teaching award"
+      }
     ],
     "awards": [
-      { "year": "2025", "name": "Cornell LGBTQ+ Faculty Mentor of the Year" },
-      { "year": "2024", "name": "NSF CAREER Award" },
-      { "year": "2023", "name": "QuTech / IEEE ICQQ Best Paper Award" },
-      { "year": "2022", "name": "Alfred P. Sloan Fellowship" },
-      { "year": "2021", "name": "DOE Early Career Nominee · Cornell Engaged Scholarship Prize" }
+      {
+        "year": "2025",
+        "name": "Cornell LGBTQ+ Faculty Mentor of the Year"
+      },
+      {
+        "year": "2024",
+        "name": "NSF CAREER Award"
+      },
+      {
+        "year": "2023",
+        "name": "QuTech / IEEE ICQQ Best Paper Award"
+      },
+      {
+        "year": "2022",
+        "name": "Alfred P. Sloan Fellowship"
+      },
+      {
+        "year": "2021",
+        "name": "DOE Early Career Nominee · Cornell Engaged Scholarship Prize"
+      }
     ],
     "service": [
       "Referee: Nature, PRL, PRX Quantum, Quantum — 60+ reviews/yr",
@@ -165,5 +278,8 @@
     "blurb": "For collaborations, speaking, mentoring requests, or just to say hi — my inbox is an open boundary condition.",
     "office": "311 Clark Hall, Ithaca, NY 14853",
     "officeHours": "Tuesdays 14:00–16:00 ET (in-person & virtual, tea provided 🫖)"
+  },
+  "blog": {
+    "intro": "Notes on quantum science, queer life in academia, and open research — each post is a Markdown file in <code>src/content/blog/</code> with YAML front matter. Supports tables, code blocks, task lists and $LaTeX$ math."
   }
 }
