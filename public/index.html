@@ -9,6 +9,7 @@
   <meta property="og:description" content="Academic &amp; research portfolio of Dr. Alex Rivera — quantum error correction, superconducting qubits, and building inclusive science. Pronouns: she/they." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0b0e1a" />
+  <script>(function(){try{var t=localStorage.getItem('qm-theme');if(!t)t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚛️</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -32,6 +33,7 @@
           <a class="nav-link" href="cv.html">CV</a>
           <a class="nav-link" href="#contact">Contact</a>
       </div>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle color theme" title="Toggle light / dark theme"><span class="icon-moon" aria-hidden="true">🌙</span><span class="icon-sun" aria-hidden="true">☀️</span></button>
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
     </nav>
   </header>
@@ -131,7 +133,7 @@
                 <p class="pub-authors">A. Rivera, J. Okafor, M. Lindqvist, et al.</p>
                 <p class="pub-venue"><em>Nature Physics</em> · <a href="https://doi.org/10.1038/s41567-026-0123-4" target="_blank" rel="noopener" onclick="event.stopPropagation();">doi:10.1038/s41567-026-0123-4</a></p>
                 <div class="tag-row">
-                  <span class="tag tag-sm">[error correction</span><span class="tag tag-sm">experiment]</span>
+                  <a class="tag tag-sm" href="tags/error-correction.html">#[error correction</a><a class="tag tag-sm" href="tags/experiment.html">#experiment]</a>
                   <span class="cite-badge" title="Citations">▲ 87 citations</span>
                   <span class="pub-toggle">▾ abstract</span>
                 </div>
@@ -149,7 +151,7 @@
                 <p class="pub-authors">M. Lindqvist, A. Rivera, T. Sandoval</p>
                 <p class="pub-venue"><em>PRX Quantum</em> · <a href="https://doi.org/10.1103/PRXQuantum.6.020301" target="_blank" rel="noopener" onclick="event.stopPropagation();">doi:10.1103/PRXQuantum.6.020301</a></p>
                 <div class="tag-row">
-                  <span class="tag tag-sm">[hardware</span><span class="tag tag-sm">superconducting qubits]</span>
+                  <a class="tag tag-sm" href="tags/hardware.html">#[hardware</a><a class="tag tag-sm" href="tags/superconducting-qubits.html">#superconducting qubits]</a>
                   <span class="cite-badge" title="Citations">▲ 142 citations</span>
                   <span class="pub-toggle">▾ abstract</span>
                 </div>
@@ -167,7 +169,7 @@
                 <p class="pub-authors">J. Okafor, A. Rivera, S. Bhatt</p>
                 <p class="pub-venue"><em>Quantum</em> · <a href="https://doi.org/10.22331/q-2024-08-12-1456" target="_blank" rel="noopener" onclick="event.stopPropagation();">doi:10.22331/q-2024-08-12-1456</a></p>
                 <div class="tag-row">
-                  <span class="tag tag-sm">[decoding</span><span class="tag tag-sm">software</span><span class="tag tag-sm">open source]</span>
+                  <a class="tag tag-sm" href="tags/decoding.html">#[decoding</a><a class="tag tag-sm" href="tags/software.html">#software</a><a class="tag tag-sm" href="tags/open-source.html">#open source]</a>
                   <span class="cite-badge" title="Citations">▲ 203 citations</span>
                   <span class="pub-toggle">▾ abstract</span>
                 </div>
@@ -216,24 +218,25 @@
       <div class="section-inner">
         <h2 class="section-title rainbow-text"><span class="hash">#</span> Latest Writing</h2>
         <p class="section-intro">Notes on quantum science, queer life in academia, and open research — each post is a Markdown file in <code>src/content/blog/</code> with YAML front matter. Supports tables, code blocks, task lists and $LaTeX$ math.</p>
+        <div class="tag-cloud" style="justify-content:center"><a class="tag-chip" href="tags/academia.html">#academia]<span class="tag-count">1</span></a><a class="tag-chip" href="tags/community.html">#[community<span class="tag-count">1</span></a><a class="tag-chip" href="tags/decoding.html">#[decoding<span class="tag-count">1</span></a><a class="tag-chip" href="tags/error-correction.html">#[error correction<span class="tag-count">1</span></a><a class="tag-chip" href="tags/experiment.html">#experiment]<span class="tag-count">1</span></a><a class="tag-chip" href="tags/hardware.html">#hardware]<span class="tag-count">2</span></a><a class="tag-chip" href="tags/open-science.html">#[open science<span class="tag-count">1</span></a><a class="tag-chip" href="tags/open-source.html">#open source]<span class="tag-count">1</span></a><a class="tag-chip" href="tags/quantum-error-correction.html">#[quantum error correction<span class="tag-count">1</span></a><a class="tag-chip" href="tags/research.html">#research]<span class="tag-count">1</span></a><a class="tag-chip" href="tags/software.html">#software<span class="tag-count">1</span></a><a class="tag-chip" href="tags/superconducting-qubits.html">#superconducting qubits]<span class="tag-count">1</span></a></div>
         <div class="blog-grid">
           <article class="blog-card reveal">
             <a class="blog-card-link" href="blog/noise-is-a-feature.html"><h3>Noise Is a Feature, Not a Bug</h3></a>
             <p class="blog-meta">August 14, 2026 · 1 min read</p>
             <p class="blog-summary">Why the errors we fight every day in the lab are exactly what makes fault tolerance possible — and what that teaches us about resilience.</p>
-            <div class="tag-row"><span class="tag tag-sm">[quantum error correction</span><span class="tag tag-sm">research]</span></div>
+            <div class="tag-row"><a class="tag tag-sm" href="tags/quantum-error-correction.html">#[quantum error correction</a><a class="tag tag-sm" href="tags/research.html">#research]</a></div>
           </article>
           <article class="blog-card reveal">
             <a class="blog-card-link" href="blog/open-hardware-manifesto.html"><h3>An Open-Hardware Manifesto for Quantum Labs</h3></a>
             <p class="blog-meta">May 2, 2026 · 1 min read</p>
             <p class="blog-summary">Control electronics are the bottleneck of every quantum lab. Here's why we publish ours — schematics, firmware, BOM and all.</p>
-            <div class="tag-row"><span class="tag tag-sm">[open science</span><span class="tag tag-sm">hardware]</span></div>
+            <div class="tag-row"><a class="tag tag-sm" href="tags/open-science.html">#[open science</a><a class="tag tag-sm" href="tags/hardware.html">#hardware]</a></div>
           </article>
           <article class="blog-card reveal">
             <a class="blog-card-link" href="blog/coming-out-in-lab-meetings.html"><h3>Coming Out in Lab Meetings (and Other Phase Transitions)</h3></a>
             <p class="blog-meta">February 19, 2026 · 1 min read</p>
             <p class="blog-summary">Practical notes on building visibility in physics departments — what worked, what backfired, and why pronouns on name tags beat policy memos.</p>
-            <div class="tag-row"><span class="tag tag-sm">[community</span><span class="tag tag-sm">academia]</span></div>
+            <div class="tag-row"><a class="tag tag-sm" href="tags/community.html">#[community</a><a class="tag tag-sm" href="tags/academia.html">#academia]</a></div>
           </article>
         </div>
         <p class="see-all"><a class="btn btn-ghost" href="blog.html">All blog posts →</a></p>

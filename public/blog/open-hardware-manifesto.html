@@ -8,6 +8,7 @@
   <meta property="og:title" content="An Open-Hardware Manifesto for Quantum Labs" />
   <meta property="og:description" content="Control electronics are the bottleneck of every quantum lab. Here's why we publish ours — schematics, firmware, BOM and all." />
   <meta name="theme-color" content="#0b0e1a" />
+  <script>(function(){try{var t=localStorage.getItem('qm-theme');if(!t)t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚛️</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,14 +31,15 @@
           <a class="nav-link" href="../cv.html">CV</a>
           <a class="nav-link" href="../index.html#contact">Contact</a>
       </div>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle color theme" title="Toggle light / dark theme"><span class="icon-moon" aria-hidden="true">🌙</span><span class="icon-sun" aria-hidden="true">☀️</span></button>
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
     </nav>
   </header>
   <main class="page-main post-page">
     <article class="post">
       <div class="section-inner narrow">
-        <p class="blog-meta">📅 May 2, 2026 · ⏱ 1 min read
-          <span class="tag tag-sm">[open science</span> <span class="tag tag-sm">hardware]</span></p>
+        <p class="blog-meta">📅 May 2, 2026 · ⏱ 1 min read</p>
+        <div class="tag-row post-tags-inline"><a class="tag tag-sm" href="../tags/open-science.html">#[open science</a><a class="tag tag-sm" href="../tags/hardware.html">#hardware]</a></div>
         <h1 class="page-title">An Open-Hardware Manifesto for Quantum Labs</h1>
         <div class="md-body post-body katex"><p>Three years ago we decided to publish everything: PCB layouts, FPGA firmware, calibration notebooks. People warned us. Here's what actually happened.</p>
 <h2>What we shipped</h2>

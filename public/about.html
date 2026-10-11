@@ -8,6 +8,7 @@
   <meta property="og:title" content="About" />
   <meta property="og:description" content="I decode noise into knowledge — in quantum systems, and in the communities around them." />
   <meta name="theme-color" content="#0b0e1a" />
+  <script>(function(){try{var t=localStorage.getItem('qm-theme');if(!t)t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚛️</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,6 +31,7 @@
           <a class="nav-link" href="cv.html">CV</a>
           <a class="nav-link" href="index.html#contact">Contact</a>
       </div>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle color theme" title="Toggle light / dark theme"><span class="icon-moon" aria-hidden="true">🌙</span><span class="icon-sun" aria-hidden="true">☀️</span></button>
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
     </nav>
   </header>

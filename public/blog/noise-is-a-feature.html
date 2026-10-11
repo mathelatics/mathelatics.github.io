@@ -8,6 +8,7 @@
   <meta property="og:title" content="Noise Is a Feature, Not a Bug" />
   <meta property="og:description" content="Why the errors we fight every day in the lab are exactly what makes fault tolerance possible — and what that teaches us about resilience." />
   <meta name="theme-color" content="#0b0e1a" />
+  <script>(function(){try{var t=localStorage.getItem('qm-theme');if(!t)t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚛️</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,14 +31,15 @@
           <a class="nav-link" href="../cv.html">CV</a>
           <a class="nav-link" href="../index.html#contact">Contact</a>
       </div>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle color theme" title="Toggle light / dark theme"><span class="icon-moon" aria-hidden="true">🌙</span><span class="icon-sun" aria-hidden="true">☀️</span></button>
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
     </nav>
   </header>
   <main class="page-main post-page">
     <article class="post">
       <div class="section-inner narrow">
-        <p class="blog-meta">📅 August 14, 2026 · ⏱ 1 min read
-          <span class="tag tag-sm">[quantum error correction</span> <span class="tag tag-sm">research]</span></p>
+        <p class="blog-meta">📅 August 14, 2026 · ⏱ 1 min read</p>
+        <div class="tag-row post-tags-inline"><a class="tag tag-sm" href="../tags/quantum-error-correction.html">#[quantum error correction</a><a class="tag tag-sm" href="../tags/research.html">#research]</a></div>
         <h1 class="page-title">Noise Is a Feature, Not a Bug</h1>
         <div class="md-body post-body katex"><p>Every first-year grad student in my lab gets the same assignment: take a surface-code patch, inject noise, watch the logical error rate fall as you grow the code distance $d$. It feels like magic the first time. It shouldn't.</p>
 <h2>Errors are local; information is global</h2>

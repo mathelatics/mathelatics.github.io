@@ -28,6 +28,18 @@ const cvDoc = loadDir('cv')[0] || { fm: {}, html: '', body: '' };
 const fmtDate = (d) => { try { return new Date(d + 'T00:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }); } catch { return d; } };
 const readTime = (body) => Math.max(1, Math.round(body.split(/\s+/).length / 200)) + ' min read';
 
+/* ---- Tag index (blog posts + publications share one tag space) ---- */
+const slugifyTag = (t) => t.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+const parseTags = (s) => String(s || '').split(',').map(t => t.trim()).filter(Boolean);
+const tagIndex = {}; // key -> { name, posts: [], pubs: [] }
+for (const p of posts) for (const t of parseTags(p.fm.tags)) {
+  const k = slugifyTag(t); (tagIndex[k] ||= { name: t, posts: [], pubs: [] }).posts.push(p);
+}
+for (const pu of pubs) for (const t of parseTags(pu.fm.tags)) {
+  const k = slugifyTag(t); (tagIndex[k] ||= { name: t, posts: [], pubs: [] }).pubs.push(pu);
+}
+const tagKeys = Object.keys(tagIndex).sort();
+
 const ICONS = {
   github: '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.55v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.16 1.18a11 11 0 0 1 5.76 0c2.2-1.49 3.16-1.18 3.16-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.66.41.36.78 1.06.78 2.14v3.17c0 .31.21.66.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>',
   scholar: '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 3 1 9l11 6 9-4.91V17h2v-8L12 3zM5 13.18v3.82c0 1.66 3.13 3 7 3s7-1.34 7-3v-3.82l-7 3.82-7-3.82z"/></svg>',
@@ -46,6 +58,10 @@ const ICONS = {
   star: '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg>',
   quote: '<svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M10 8H6a4 4 0 0 0-4 4v6h8v-6H6a2 2 0 0 1 2-2h2V8zm10 0h-4a4 4 0 0 0-4 4v6h8v-6h-2a2 2 0 0 1 2-2h2V8z"/></svg>'
 };
+
+/* Shared head bits for every page */
+const THEME_HEAD = `  <script>(function(){try{var t=localStorage.getItem('qm-theme');if(!t)t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>\n`;
+const TOGGLE_BTN = `<button class="theme-toggle" id="theme-toggle" aria-label="Toggle color theme" title="Toggle light / dark theme"><span class="icon-moon" aria-hidden="true">🌙</span><span class="icon-sun" aria-hidden="true">☀️</span></button>`;
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
@@ -73,7 +89,7 @@ const pubItems = pubs.map(p => `
                 <p class="pub-authors">${esc(p.fm.authors)}</p>
                 <p class="pub-venue"><em>${esc(p.fm.venue)}</em>${p.fm.doi ? ` · <a href=\"https://doi.org/${esc(p.fm.doi)}\" target=\"_blank\" rel=\"noopener\" onclick=\"event.stopPropagation();\">doi:${esc(p.fm.doi)}</a>` : ''}</p>
                 <div class="tag-row">
-                  ${String(p.fm.tags || '').split(',').filter(Boolean).map(t => `<span class="tag tag-sm">${esc(t.trim())}</span>`).join('')}
+                  ${parseTags(p.fm.tags).map(t => `<a class="tag tag-sm" href="tags/${slugifyTag(t)}.html">#${esc(t)}</a>`).join('')}
                   <span class="cite-badge" title="Citations">▲ ${esc(p.fm.citations)} citations</span>
                   <span class="pub-toggle">▾ abstract</span>
                 </div>
@@ -108,6 +124,17 @@ const positionItems = cv.positions.map(p => `
 const awardItems = cv.awards.map(a => `<li class="reveal"><span class="award-year">${esc(a.year)}</span> ${esc(a.name)}</li>`).join('');
 const serviceItems = cv.service.map(s => `<li>${esc(s)}</li>`).join('');
 
+/* ---- Tag helpers ---- */
+const tagChipsForPost = (p, prefix) => parseTags(p.fm.tags).map(t =>
+  `<a class="tag tag-sm" href="${prefix}tags/${slugifyTag(t)}.html">#${esc(t)}</a>`).join('');
+const tagCloud = (prefix, activeKey) => `<div class="tag-cloud">${tagKeys.map(k =>
+  `          <a class="tag-chip${k === activeKey ? ' active' : ''}" href="${prefix}tags/${k}.html">#${esc(tagIndex[k].name)}<span class="tag-count">${tagIndex[k].posts.length + tagIndex[k].pubs.length}</span></a>`).join('\n')}\n        </div>`;
+
+/* Shared publication list renderer (homepage + tag pages) */
+function pubListHtml(list) {
+  return `\n        <h2 class="cv-subtitle"><span class="hash">#</span> Publications</h2>\n        <ol class="pub-list">\n${list.map(pu => `          <li class="pub reveal">\n            <details>\n              <summary>\n                <span class="pub-year">${esc(pu.fm.year)}</span>\n                <div class="pub-body">\n                  <h3 class="pub-title">${esc(pu.fm.title)}</h3>\n                  <p class="pub-authors">${esc(pu.fm.authors)}</p>\n                  <p class="pub-venue"><em>${esc(pu.fm.venue)}</em>${pu.fm.doi ? ` · <a href=\"https://doi.org/${esc(pu.fm.doi)}\" target=\"_blank\" rel=\"noopener\" onclick=\"event.stopPropagation();\">doi:${esc(pu.fm.doi)}</a>` : ''}</p>\n                  <span class="pub-toggle">▾ abstract</span>\n                </div>\n              </summary>\n              <div class=\"md-body pub-abstract\">${pu.html}</div>\n            </details>\n          </li>`).join('\n')}\n        </ol>`;
+}
+
 /* Homepage nav uses in-page anchors; sub-pages use full hrefs via pageShell */
 const pageLinks = { about: 'about.html', blog: 'blog.html', cv: 'cv.html' };
 const navHtmlHome = nav.map(n => `<a class="nav-link" href="${pageLinks[n.id] || '#' + n.id}">${esc(n.label)}</a>`).join('\n          ');
@@ -123,7 +150,7 @@ const html = `<!DOCTYPE html>
   <meta property="og:description" content="${esc(meta.description)}" />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0b0e1a" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚛️</text></svg>" />
+${THEME_HEAD}  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚛️</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
@@ -139,6 +166,7 @@ const html = `<!DOCTYPE html>
       <div class="nav-links" id="nav-links">
           ${navHtmlHome}
       </div>
+      ${TOGGLE_BTN}
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
     </nav>
   </header>
@@ -210,12 +238,13 @@ const html = `<!DOCTYPE html>
       <div class="section-inner">
         <h2 class="section-title rainbow-text"><span class="hash">#</span> Latest Writing</h2>
         <p class="section-intro">${blog.intro}</p>
+        <div class="tag-cloud" style="justify-content:center">${tagKeys.map(k => `<a class="tag-chip" href="tags/${k}.html">#${esc(tagIndex[k].name)}<span class="tag-count">${tagIndex[k].posts.length + tagIndex[k].pubs.length}</span></a>`).join('')}</div>
         <div class="blog-grid">${posts.slice(0, 3).map(p => `
           <article class="blog-card reveal">
             <a class="blog-card-link" href="blog/${p.slug}.html"><h3>${esc(p.fm.title)}</h3></a>
             <p class="blog-meta">${fmtDate(p.fm.date)} · ${readTime(p.body)}</p>
             <p class="blog-summary">${esc(p.fm.summary || '')}</p>
-            <div class="tag-row">${String(p.fm.tags || '').split(',').filter(Boolean).map(t => `<span class="tag tag-sm">${esc(t.trim())}</span>`).join('')}</div>
+            <div class="tag-row">${tagChipsForPost(p, '')}</div>
           </article>`).join('')}
         </div>
         <p class="see-all"><a class="btn btn-ghost" href="blog.html">All blog posts →</a></p>
@@ -284,6 +313,7 @@ const html = `<!DOCTYPE html>
 `;
 
 fs.mkdirSync(path.join(ROOT, 'public'), { recursive: true });
+
 fs.writeFileSync(path.join(ROOT, 'public/index.html'), html);
 console.log('✓ public/index.html written (' + html.length + ' bytes)');
 
@@ -302,7 +332,7 @@ function pageShell({ title, desc, contentClass, main, prefix }) {
   <meta property="og:title" content="${esc(title)}" />
   <meta property="og:description" content="${esc(desc)}" />
   <meta name="theme-color" content="#0b0e1a" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚛️</text></svg>" />
+${THEME_HEAD}  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚛️</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
@@ -317,6 +347,7 @@ function pageShell({ title, desc, contentClass, main, prefix }) {
       <div class="nav-links" id="nav-links">
           ${nav.map(n => `<a class="nav-link" href="${esc(p + (n.href || '#' + n.id))}">${esc(n.label)}</a>`).join('\n          ')}
       </div>
+      ${TOGGLE_BTN}
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
     </nav>
   </header>
@@ -402,12 +433,14 @@ writePage('blog.html', pageShell({
       <div class="section-inner">
         <h1 class="page-title rainbow-text">Blog</h1>
         <p class="section-intro">${blog.intro}</p>
+        <h2 class="cv-subtitle"><span class="hash">#</span> Browse by tag</h2>
+        ${tagCloud('')}
         <div class="blog-grid">
 ${posts.map(p => `          <article class="blog-card reveal">
             <a class="blog-card-link" href="blog/${p.slug}.html"><h3>${esc(p.fm.title)}</h3></a>
             <p class="blog-meta">📅 ${fmtDate(p.fm.date)} · ⏱ ${readTime(p.body)}</p>
             <p class="blog-summary">${esc(p.fm.summary || '')}</p>
-            <div class="tag-row">${String(p.fm.tags || '').split(',').filter(Boolean).map(t => `<span class="tag tag-sm">${esc(t.trim())}</span>`).join('')}</div>
+            <div class="tag-row">${tagChipsForPost(p, '')}</div>
           </article>`).join('\n')}
         </div>
       </div>
@@ -425,8 +458,8 @@ for (const p of posts) {
     contentClass: 'page-main post-page',
     main: `    <article class="post">
       <div class="section-inner narrow">
-        <p class="blog-meta">📅 ${fmtDate(p.fm.date)} · ⏱ ${readTime(p.body)}
-          ${String(p.fm.tags || '').split(',').filter(Boolean).map(t => `<span class="tag tag-sm">${esc(t.trim())}</span>`).join(' ')}</p>
+        <p class="blog-meta">📅 ${fmtDate(p.fm.date)} · ⏱ ${readTime(p.body)}</p>
+        <div class="tag-row post-tags-inline">${tagChipsForPost(p, '../')}</div>
         <h1 class="page-title">${esc(p.fm.title)}</h1>
         <div class="md-body post-body katex">${p.html}</div>
         <hr />
@@ -436,5 +469,28 @@ for (const p of posts) {
         </nav>
       </div>
     </article>`
+  }));
+}
+
+/* ---- Tag filter pages (public/tags/<slug>.html) — posts + publications per tag ---- */
+for (const k of tagKeys) {
+  const t = tagIndex[k];
+  const total = t.posts.length + t.pubs.length;
+  writePage(`tags/${k}.html`, pageShell({
+    title: `#${t.name}`,
+    desc: `Writing and papers tagged “${t.name}” on ${meta.title}'s portfolio.`,
+    prefix: '../',
+    contentClass: 'page-main',
+    main: `    <section class="page-section">
+      <div class="section-inner">
+        <p class="tag-hero-kicker"><a href="../index.html#blog">Portfolio</a> / <a href="../blog.html">Blog</a> / Tags</p>
+        <h1 class="page-title gradient-text tag-hero-title">#${esc(t.name)}</h1>
+        <p class="tag-hero-count">${total} item${total === 1 ? '' : 's'} — ${t.posts.length} post${t.posts.length === 1 ? '' : 's'} · ${t.pubs.length} publication${t.pubs.length === 1 ? '' : 's'}</p>
+        ${tagCloud('../', k)}
+        ${t.posts.length ? `<h2 class="cv-subtitle"><span class="hash">#</span> Writing</h2>\n        <div class="blog-grid">\n${t.posts.map(p => `          <article class="blog-card reveal">\n            <a class="blog-card-link" href="../blog/${p.slug}.html"><h3>${esc(p.fm.title)}</h3></a>\n            <p class="blog-meta">📅 ${fmtDate(p.fm.date)} · ⏱ ${readTime(p.body)}</p>\n            <p class="blog-summary">${esc(p.fm.summary || '')}</p>\n            <div class="tag-row">${tagChipsForPost(p, '../')}</div>\n          </article>`).join('\n')}\n        </div>` : ''}
+        ${t.pubs.length ? pubListHtml(t.pubs) : ''}
+        <p class="see-all"><a class="btn btn-ghost" href="../blog.html">← All blog posts</a></p>
+      </div>
+    </section>`
   }));
 }
