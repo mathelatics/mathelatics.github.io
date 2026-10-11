@@ -1,0 +1,10 @@
+{
+  "name": "quantum-academic-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Modern dark-themed academic & research portfolio for a quantum scientist / LGBTQ+ advocate — pure static site, GitHub Pages ready.",
+  "scripts": {
+    "build": "node build.js && mkdir -p public/styles public/js && cp src/styles/main.css public/styles/ && cp src/js/app.js public/js/",
+    "start": "npm run build && python3 -m http.server 8080 --directory public"
+  }
+}

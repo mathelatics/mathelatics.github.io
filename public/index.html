@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dr. Alex Rivera, PhD — Quantum Research & Academic Portfolio</title>
+  <meta name="description" content="Academic &amp; research portfolio of Dr. Alex Rivera — quantum error correction, superconducting qubits, and building inclusive science. Pronouns: she/they." />
+  <meta property="og:title" content="Dr. Alex Rivera, PhD" />
+  <meta property="og:description" content="Academic &amp; research portfolio of Dr. Alex Rivera — quantum error correction, superconducting qubits, and building inclusive science. Pronouns: she/they." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0b0e1a" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚛️</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+  <canvas id="quantum-canvas" aria-hidden="true"></canvas>
+  <div class="rainbow-bar" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <nav class="nav-container" aria-label="Primary">
+      <a class="brand" href="#top"><span class="brand-atom" aria-hidden="true">⚛</span> <span class="brand-name">Dr. Alex Rivera, PhD</span></a>
+      <div class="nav-links" id="nav-links">
+          <a class="nav-link" href="#about">About</a>
+          <a class="nav-link" href="#research">Research</a>
+          <a class="nav-link" href="#publications">Publications</a>
+          <a class="nav-link" href="#projects">Projects</a>
+          <a class="nav-link" href="#talks">Talks</a>
+          <a class="nav-link" href="#teaching">Teaching</a>
+          <a class="nav-link" href="#advocacy">Advocacy</a>
+          <a class="nav-link" href="#cv">CV</a>
+          <a class="nav-link" href="#contact">Contact</a>
+      </div>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-inner">
+        <div class="avatar-ring" aria-hidden="true"><div class="avatar">AR</div></div>
+        <p class="hero-kicker">Academic &amp; Research Portfolio · <span class="pronoun-chip">she / they</span></p>
+        <h1 class="hero-title gradient-text">Dr. Alex Rivera, PhD</h1>
+        <p class="hero-tagline">Quantum Information Scientist • LGBTQ+ Advocate • Open-Research Educator</p>
+        <p class="hero-location">📍 Ithaca, NY · They/Them HQ</p>
+        <div class="social-row">
+          <a class="social-btn" href="https://github.com/mathelatics" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.55v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.16 1.18a11 11 0 0 1 5.76 0c2.2-1.49 3.16-1.18 3.16-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.66.41.36.78 1.06.78 2.14v3.17c0 .31.21.66.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg></a>
+          <a class="social-btn" href="https://scholar.google.com/" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar" title="Google Scholar"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 3 1 9l11 6 9-4.91V17h2v-8L12 3zM5 13.18v3.82c0 1.66 3.13 3 7 3s7-1.34 7-3v-3.82l-7 3.82-7-3.82z"/></svg></a>
+          <a class="social-btn" href="https://orcid.org/0000-0002-1825-0097" target="_blank" rel="noopener noreferrer" aria-label="ORCID" title="ORCID"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM8.3 7.6a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8zm-.7 2.9h1.4v6H7.6v-6zm3.6 0h2.2c2.2 0 3.4 1.5 3.4 3s-1.2 3-3.4 3h-2.2v-6zm1.4 1.3v3.4h.9c1.4 0 2-.7 2-1.7s-.6-1.7-2-1.7h-.9z"/></svg></a>
+          <a class="social-btn" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3V9.5zm6.5 0h3.8v1.6h.05c.53-1 1.83-2.06 3.77-2.06 4 0 4.88 2.6 4.88 6V21h-4v-5.1c0-1.22-.02-2.8-1.7-2.8-1.7 0-1.96 1.33-1.96 2.7V21h-4V9.5z"/></svg></a>
+          <a class="social-btn" href="https://mastodon.social/" target="_blank" rel="noopener noreferrer" aria-label="Mastodon" title="Mastodon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M21.3 8.2c0-4.4-2.9-5.7-2.9-5.7C17 1.9 14.7 1.7 12.3 1.7h-.1c-2.4 0-4.7.2-6.1.8 0 0-2.9 1.3-2.9 5.7v3.5c.1 4.7.6 6.9 3.1 7.8 2 .8 3.7.9 5.6.7 1.7-.1 3.2-.5 4.8-1.1v2.3c-1.3.5-2.8.8-4.6.9-3.1.2-5.8-.4-8-1.6-3.8-2.1-4.4-7.5-4.5-9.5v-.5l-.1-1.6c0-5.5 3.6-6.4 3.6-6.4C5.6 1.1 8.7.9 9.8.9h.1c3.4.1 6.4.9 6.4.9 3.9 1 4 5.1 4 7.1v3.9h-3.6V8.5c0-2.4-.5-3.2-1.9-3.2-1.4 0-1.9.9-1.9 3.1v2.7h-3.5V8.4c0-2.2-.5-3.1-1.9-3.1-1.4 0-1.9.8-1.9 3.2v5.9H5.5c.1 2.4.7 6.4 6.5 6.6 2.6.1 4.4-.7 6.1-1.6v-4.7h.1c1.5-.3 3.1-.9 3.1-3.6z"/></svg></a>
+          <a class="social-btn" href="mailto:alex.rivera@cornell.example.edu" target="_blank" rel="noopener noreferrer" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg></a>
+        </div>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#contact">Get in touch</a>
+          <a class="btn btn-ghost" href="#publications">Read the papers</a>
+        </div>
+        <div class="stats-row">
+            <div class="stat"><span class="stat-value" data-count="23">23</span><span class="stat-label">Peer-reviewed papers</span></div>
+            <div class="stat"><span class="stat-value" data-count="1.4k+">1.4k+</span><span class="stat-label">Citations · h-index 19</span></div>
+            <div class="stat"><span class="stat-value" data-count="6">6</span><span class="stat-label">Open-source projects</span></div>
+            <div class="stat"><span class="stat-value" data-count="40+">40+</span><span class="stat-label">Invited talks &amp; outreach</span></div>
+        </div>
+      </div>
+      <div class="scroll-hint" aria-hidden="true">▾</div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="section-inner">
+        <h2 class="section-title"><span class="hash">#</span> About</h2>
+        <p class="about-lead">I decode noise into knowledge.</p>
+        <p class="about-p">I am a quantum information scientist working at the intersection of <strong>superconducting qubits</strong>, <strong>quantum error correction</strong>, and <strong>open scientific software</strong>. My group's mission: make fault-tolerant quantum computing real — and make the path into quantum science welcoming for everyone, especially LGBTQ+ and underrepresented folks who too often get measured out of the wavefunction.</p>
+        <p class="about-p">As an openly queer, nonbinary-leaning (she/they) academic, I believe representation is a form of error correction for the scientific community: it catches the bit-flips of bias before they propagate through a career. I mentor queer STEM students, review for inclusive hiring, and build tools that lower the barrier to entry into quantum research.</p>
+        <div class="tag-row chip-row"><span class="chip">Quantum Error Correction</span><span class="chip">Superconducting Circuits</span><span class="chip">Quantum ML</span><span class="chip">Open Source</span><span class="chip">Science Policy</span><span class="chip">DEI in STEM</span></div>
+        <div class="highlights-grid">
+        <div class="highlight-card reveal">
+          <div class="highlight-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 3h6M10 3v6L4.5 18a2 2 0 0 0 1.8 3h11.4a2 2 0 0 0 1.8-3L14 9V3"/><path d="M7 15h10"/></svg></div>
+          <div><h3>Currently</h3><p>Building a surface-code simulator (QubitForge) and running logical-qubit benchmarks on a 127-node transmon processor.</p></div>
+        </div>
+        <div class="highlight-card reveal">
+          <div class="highlight-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5"/></svg></div>
+          <div><h3>Recognition</h3><p>NSF CAREER Award (2024) · QuTech Best Paper (2023) · Cornell LGBTQ+ Faculty Mentor of the Year (2025).</p></div>
+        </div>
+        <div class="highlight-card reveal">
+          <div class="highlight-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2c3 3.5 3 16.5 0 20-3-3.5-3-16.5 0-20z"/></svg></div>
+          <div><h3>Community</h3><p>Co-founder of QueerQuantum — a global network of 500+ LGBTQ+ quantum scientists and allies.</p></div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESEARCH -->
+    <section class="section section-alt" id="research">
+      <div class="section-inner">
+        <h2 class="section-title"><span class="hash">#</span> Research Areas</h2>
+        <p class="section-intro">My research treats coherence as both a physical resource and a human one. Five active thrusts:</p>
+        <div class="research-grid">
+        <article class="research-card reveal" style="--accent:#7c5cff">
+          <div class="research-index">01</div>
+          <h3>Fault-Tolerant Architectures</h3>
+          <p>Surface &amp; color codes, lattice surgery, and magic-state distillation with realistic noise models. Goal: reduce the overhead from logical qubit to useful circuit by 10×.</p>
+          <div class="tag-row"><span class="tag">Surface Codes</span><span class="tag">Lattice Surgery</span><span class="tag">Threshold Theorems</span></div>
+        </article>
+        <article class="research-card reveal" style="--accent:#ff5c8a">
+          <div class="research-index">02</div>
+          <h3>Superconducting Qubit Hardware</h3>
+          <p>Transmon design, 3D cavities, and parametric couplers. We chase T1/T2 beyond 500 µs while keeping fabrication yield above 90%.</p>
+          <div class="tag-row"><span class="tag">Transmons</span><span class="tag">Circuit QED</span><span class="tag">Cryogenics</span></div>
+        </article>
+        <article class="research-card reveal" style="--accent:#22d3ee">
+          <div class="research-index">03</div>
+          <h3>Quantum Machine Learning</h3>
+          <p>Barren-plateau avoidance, quantum kernels for materials discovery, and NISCA-era hybrid pipelines that actually beat classical baselines.</p>
+          <div class="tag-row"><span class="tag">Variational Algorithms</span><span class="tag">Quantum Kernels</span><span class="tag">Hybrid Pipelines</span></div>
+        </article>
+        <article class="research-card reveal" style="--accent:#34d399">
+          <div class="research-index">04</div>
+          <h3>Open Quantum Software</h3>
+          <p>Maintainer tooling for reproducible experiments: calibration daemons, schema'd pulse schedules, and simulation backends anyone can audit.</p>
+          <div class="tag-row"><span class="tag">Reproducibility</span><span class="tag">Python</span><span class="tag">CUDA</span></div>
+        </article>
+        <article class="research-card reveal" style="--accent:#fbbf24">
+          <div class="research-index">05</div>
+          <h3>Ethics, Policy &amp; Inclusion in Quantum</h3>
+          <p>Quantum technology governance, export-control equity, and workforce studies on LGBTQ+ retention in physics departments.</p>
+          <div class="tag-row"><span class="tag">Policy</span><span class="tag">Workforce Studies</span><span class="tag">Ethics</span></div>
+        </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section class="section" id="publications">
+      <div class="section-inner">
+        <h2 class="section-title"><span class="hash">#</span> Selected Publications</h2>
+        <p class="section-intro">Selected publications — full list on Google Scholar. (* = equal contribution, † = corresponding) · <a href="https://scholar.google.com/" target="_blank" rel="noopener">Full list on Google Scholar →</a></p>
+        <ol class="pub-list">
+        <li class="pub reveal">
+          <div class="pub-year">2026</div>
+          <div class="pub-body">
+            <h3 class="pub-title">Logical-time crystalline order on a noisy superconducting quantum processor</h3>
+            <p class="pub-authors">A. Rivera*, J. Okafor*, M. Lindqvist, S. Chen, D. Whitfield†</p>
+            <p class="pub-venue"><em>Nature Physics</em> · <a href="https://doi.org/10.1038/s41567-026-0012-3" target="_blank" rel="noopener">doi:10.1038/s41567-026-0012-3</a></p>
+            <div class="tag-row">
+              <span class="tag tag-sm">Experiment</span><span class="tag tag-sm">Error Correction</span>
+              <span class="cite-badge" title="Citations">▲ 42 citations</span>
+            </div>
+          </div>
+        </li>
+        <li class="pub reveal">
+          <div class="pub-year">2025</div>
+          <div class="pub-body">
+            <h3 class="pub-title">QubitForge: a GPU-accelerated stabilizer simulator with differentiable noise channels</h3>
+            <p class="pub-authors">A. Rivera†, L. Park, T. Alvarez</p>
+            <p class="pub-venue"><em>PRX Quantum 6, 020345</em> · <a href="https://doi.org/10.1103/PRXQuantum.6.020345" target="_blank" rel="noopener">doi:10.1103/PRXQuantum.6.020345</a></p>
+            <div class="tag-row">
+              <span class="tag tag-sm">Software</span><span class="tag tag-sm">Open Source</span>
+              <span class="cite-badge" title="Citations">▲ 118 citations</span>
+            </div>
+          </div>
+        </li>
+        <li class="pub reveal">
+          <div class="pub-year">2025</div>
+          <div class="pub-body">
+            <h3 class="pub-title">Rainbow metrics: auditing inclusion outcomes in quantum workforce programs</h3>
+            <p class="pub-authors">K. Nguyen, A. Rivera</p>
+            <p class="pub-venue"><em>Physical Review Physics Education Research 20</em> · <a href="https://doi.org/10.1103/PhysRevPhysEducRes.20.010123" target="_blank" rel="noopener">doi:10.1103/PhysRevPhysEducRes.20.010123</a></p>
+            <div class="tag-row">
+              <span class="tag tag-sm">DEI</span><span class="tag tag-sm">Education</span>
+              <span class="cite-badge" title="Citations">▲ 27 citations</span>
+            </div>
+          </div>
+        </li>
+        <li class="pub reveal">
+          <div class="pub-year">2024</div>
+          <div class="pub-body">
+            <h3 class="pub-title">Low-overhead magic-state cultivation with twisted bilayer decoders</h3>
+            <p class="pub-authors">S. Chen, A. Rivera, M. Lindqvist</p>
+            <p class="pub-venue"><em>Quantum 8, 1402</em> · <a href="https://doi.org/10.22331/q-2024-08-14-1402" target="_blank" rel="noopener">doi:10.22331/q-2024-08-14-1402</a></p>
+            <div class="tag-row">
+              <span class="tag tag-sm">Theory</span><span class="tag tag-sm">Magic States</span>
+              <span class="cite-badge" title="Citations">▲ 96 citations</span>
+            </div>
+          </div>
+        </li>
+        <li class="pub reveal">
+          <div class="pub-year">2024</div>
+          <div class="pub-body">
+            <h3 class="pub-title">Calibration-as-code: reproducible experiment control for transmon arrays</h3>
+            <p class="pub-authors">T. Alvarez, R. Iyer, A. Rivera†</p>
+            <p class="pub-venue"><em>npj Quantum Information 10</em> · <a href="https://doi.org/10.1038/s41534-024-00812-x" target="_blank" rel="noopener">doi:10.1038/s41534-024-00812-x</a></p>
+            <div class="tag-row">
+              <span class="tag tag-sm">Software</span><span class="tag tag-sm">Experiment</span>
+              <span class="cite-badge" title="Citations">▲ 61 citations</span>
+            </div>
+          </div>
+        </li>
+        <li class="pub reveal">
+          <div class="pub-year">2023</div>
+          <div class="pub-body">
+            <h3 class="pub-title">Quantum kernel methods for high-entropy alloy screening at NISQ scale</h3>
+            <p class="pub-authors">L. Park, A. Rivera, H. Yamada</p>
+            <p class="pub-venue"><em>Quantum Science and Technology 8(4)</em> · <a href="https://doi.org/10.1088/2058-9565/acf3b1" target="_blank" rel="noopener">doi:10.1088/2058-9565/acf3b1</a></p>
+            <div class="tag-row">
+              <span class="tag tag-sm">Quantum ML</span><span class="tag tag-sm">Materials</span>
+              <span class="cite-badge" title="Citations">▲ 143 citations</span>
+            </div>
+          </div>
+        </li>
+        <li class="pub reveal">
+          <div class="pub-year">2023</div>
+          <div class="pub-body">
+            <h3 class="pub-title">Measurement-free fault tolerance with coherent feedback</h3>
+            <p class="pub-authors">D. Whitfield, A. Rivera</p>
+            <p class="pub-venue"><em>PRL 131, 080601</em> · <a href="https://doi.org/10.1103/PhysRevLett.131.080601" target="_blank" rel="noopener">doi:10.1103/PhysRevLett.131.080601</a></p>
+            <div class="tag-row">
+              <span class="tag tag-sm">Theory</span><span class="tag tag-sm">Best Paper</span>
+              <span class="cite-badge" title="Citations">▲ 205 citations</span>
+            </div>
+          </div>
+        </li>
+        <li class="pub reveal">
+          <div class="pub-year">2022</div>
+          <div class="pub-body">
+            <h3 class="pub-title">QueerQuantum: building a global community for LGBTQ+ scientists in quantum tech</h3>
+            <p class="pub-authors">A. Rivera†, Community Collective</p>
+            <p class="pub-venue"><em>Bulletin of the APS (Forum on Education)</em></p>
+            <div class="tag-row">
+              <span class="tag tag-sm">Community</span><span class="tag tag-sm">Invited</span>
+              <span class="cite-badge" title="Citations">▲ 19 citations</span>
+            </div>
+          </div>
+        </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section section-alt" id="projects">
+      <div class="section-inner">
+        <h2 class="section-title"><span class="hash">#</span> Open-Source Projects</h2>
+        <p class="section-intro">Everything below is open source (or openly published). Star it, fork it, audit it — and PRs from queer devs get priority review. 🏳️‍🌈</p>
+        <div class="project-grid">
+        <a class="project-card reveal" href="https://github.com/" target="_blank" rel="noopener noreferrer">
+          <div class="project-top"><h3>QubitForge</h3><span class="badge">Flagship</span></div>
+          <p>GPU-accelerated stabilizer + state-vector simulator with differentiable noise channels. Powers 40+ papers.</p>
+          <div class="project-meta"><span>Python / CUDA</span><span class="stars"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg> 3.1k</span></div>
+        </a>
+        <a class="project-card reveal" href="https://github.com/" target="_blank" rel="noopener noreferrer">
+          <div class="project-top"><h3>calib-daemon</h3><span class="badge">Tooling</span></div>
+          <p>Always-on transmon calibration framework: drift detection, auto-rerun, and git-versioned calibration reports.</p>
+          <div class="project-meta"><span>Python</span><span class="stars"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg> 640</span></div>
+        </a>
+        <a class="project-card reveal" href="https://github.com/" target="_blank" rel="noopener noreferrer">
+          <div class="project-top"><h3>qec-playbook</h3><span class="badge">Education</span></div>
+          <p>Interactive textbook: 'Surface Codes for Humans' — runnable notebooks from Bloch sphere to lattice surgery.</p>
+          <div class="project-meta"><span>Jupyter / mdBook</span><span class="stars"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg> 1.8k</span></div>
+        </a>
+        <a class="project-card reveal" href="https://github.com/" target="_blank" rel="noopener noreferrer">
+          <div class="project-top"><h3>rainbow-pulse</h3><span class="badge">Accessibility</span></div>
+          <p>Pulse-sequence designer with accessibility-first UI: screen-reader labels, colorblind-safe palettes, keyboard nav.</p>
+          <div class="project-meta"><span>TypeScript / WASM</span><span class="stars"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg> 410</span></div>
+        </a>
+        <a class="project-card reveal" href="https://github.com/" target="_blank" rel="noopener noreferrer">
+          <div class="project-top"><h3>queerquantum-site</h3><span class="badge">Community</span></div>
+          <p>Community hub, mentorship matching, and job board for LGBTQ+ quantum scientists &amp; allies.</p>
+          <div class="project-meta"><span>Hugo / JS</span><span class="stars"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg> 180</span></div>
+        </a>
+        <a class="project-card reveal" href="https://github.com/" target="_blank" rel="noopener noreferrer">
+          <div class="project-top"><h3>noise-zoo</h3><span class="badge">Data</span></div>
+          <p>Curated library of benchmarked noise models from real devices — because synthetic depolarizing noise lies.</p>
+          <div class="project-meta"><span>JSON / Python</span><span class="stars"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg> 520</span></div>
+        </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TALKS -->
+    <section class="section" id="talks">
+      <div class="section-inner">
+        <h2 class="section-title"><span class="hash">#</span> Talks &amp; Invited Lectures</h2>
+        <ul class="talk-list">
+        <li class="talk reveal">
+          <span class="talk-date">Mar 2026</span>
+          <div><strong>Coherence, Community, and Code: An Open Path to Fault Tolerance</strong><span class="talk-where"> — TEDx Ithaca (Main stage)</span></div>
+          <span class="talk-type type-keynote">keynote</span>
+        </li>
+        <li class="talk reveal">
+          <span class="talk-date">Jan 2026</span>
+          <div><strong>Differentiable Decoders for Logical Qubits</strong><span class="talk-where"> — QIP 2026, Newport Beach</span></div>
+          <span class="talk-type type-contributed">contributed</span>
+        </li>
+        <li class="talk reveal">
+          <span class="talk-date">Oct 2025</span>
+          <div><strong>Panel: Queer Joy as Scientific Method</strong><span class="talk-where"> — APS March Meeting (invited session)</span></div>
+          <span class="talk-type type-panel">panel</span>
+        </li>
+        <li class="talk reveal">
+          <span class="talk-date">Jun 2025</span>
+          <div><strong>Keynote — Who Gets to Do Quantum?</strong><span class="talk-where"> — InclusiveSTEM Summit, Berlin</span></div>
+          <span class="talk-type type-keynote">keynote</span>
+        </li>
+        <li class="talk reveal">
+          <span class="talk-date">Feb 2025</span>
+          <div><strong>Calibration-as-Code in Production QPU Labs</strong><span class="talk-where"> — IEEE ICQQ, Kyoto</span></div>
+          <span class="talk-type type-invited">invited</span>
+        </li>
+        <li class="talk reveal">
+          <span class="talk-date">Nov 2024</span>
+          <div><strong>Surface Codes from Scratch — Tutorial</strong><span class="talk-where"> — NeurIPS Quantum Workshop</span></div>
+          <span class="talk-type type-tutorial">tutorial</span>
+        </li>
+        <li class="talk reveal">
+          <span class="talk-date">Sep 2024</span>
+          <div><strong>The Rainbow Wavefunction: Retention of LGBTQ+ Physicists</strong><span class="talk-where"> — Cornell Colloquium</span></div>
+          <span class="talk-type type-colloquium">colloquium</span>
+        </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- TEACHING -->
+    <section class="section section-alt" id="teaching">
+      <div class="section-inner">
+        <h2 class="section-title"><span class="hash">#</span> Teaching &amp; Mentoring</h2>
+        <p class="section-intro">Teaching is applied error correction: repeated gentle feedback keeps every student's logical information intact.</p>
+        <div class="course-grid">
+        <article class="course-card reveal">
+          <div class="course-code">PHYS 6610</div>
+          <h3>Quantum Computation I</h3>
+          <p class="course-term">Fall 2024 – 2026 · Graduate</p>
+          <p>From qubits to surface codes with weekly lab simulations on real hardware.</p>
+          <p class="course-rating">★ 4.9 / 5.0 · 128 evals</p>
+        </article>
+        <article class="course-card reveal">
+          <div class="course-code">INFO 4520</div>
+          <h3>Quantum Information for Everyone</h3>
+          <p class="course-term">Spring 2025 – 2026 · Undergraduate (no physics prereq!)</p>
+          <p>A deliberately gatekeeping-free intro course; 40% of cohort identify as LGBTQ+ or first-gen.</p>
+          <p class="course-rating">★ 4.8 / 5.0 · 96 evals</p>
+        </article>
+        <article class="course-card reveal">
+          <div class="course-code">ENGRI 1285</div>
+          <h3>First-Year Seminar: Noise &amp; Signal in Science and Society</h3>
+          <p class="course-term">Fall 2025 · First-year</p>
+          <p>Uses quantum noise as a lens for misinformation, measurement bias, and belonging.</p>
+          <p class="course-rating">★ 5.0 / 5.0 · 31 evals</p>
+        </article>
+        </div>
+        <p class="mentoring-note reveal">🎓 Mentored 14 PhD students (7 defended), 9 postdocs, and 30+ undergrads — 60% women, gender-minority, or LGBTQ+ scholars.</p>
+      </div>
+    </section>
+
+    <!-- ADVOCACY -->
+    <section class="section advocacy" id="advocacy">
+      <div class="section-inner">
+        <h2 class="section-title rainbow-text"><span class="hash">#</span> LGBTQ+ Advocacy &amp; Community</h2>
+        <p class="section-intro advocacy-lead">Science is for all of us. Full stop.</p>
+        <div class="advocacy-grid">
+        <div class="advocacy-item reveal">
+          <div class="advocacy-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 22V4a1 1 0 0 1 1-1c4 0 6 2 10 2 2 0 4-1 4-1v11s-2 1-4 1c-4 0-6-2-10-2"/></svg></div>
+          <div><h3>QueerQuantum Co-Founder</h3><p>Built a 500+-member global network with mentorship circles, conference meet-ups, and an affirming job board.</p></div>
+        </div>
+        <div class="advocacy-item reveal">
+          <div class="advocacy-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.5 9.3 8 11 4.5-1.7 8-6 8-11V5l-8-3z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <div><h3>Departmental Climate Council</h3><p>Lead author of Cornell's first LGBTQ+ faculty &amp; student climate report; drove pronoun-field adoption in university systems.</p></div>
+        </div>
+        <div class="advocacy-item reveal">
+          <div class="advocacy-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg></div>
+          <div><h3>Inclusive Curriculum Working Group</h3><p>APS committee member rewriting quantum textbooks' examples, names, and problem sets to reflect real diversity.</p></div>
+        </div>
+        <div class="advocacy-item reveal">
+          <div class="advocacy-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19.5 12.6 12 20l-7.5-7.4A5 5 0 1 1 12 6.3a5 5 0 1 1 7.5 6.3z"/></svg></div>
+          <div><h3>Trans Healthcare &amp; Career Fund</h3><p>Raised $85k to cover transition-related care and conference travel for queer grad students.</p></div>
+        </div>
+        <div class="advocacy-item reveal">
+          <div class="advocacy-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m3 11 18-7v16L3 13v-2z"/><path d="M7 13v6a2 2 0 0 0 4 0v-4"/></svg></div>
+          <div><h3>Visibility &amp; Media</h3><p>Quilting, Nature Careers feature, NPR 'All Systems' interview — telling the story of an openly queer quantum scientist.</p></div>
+        </div>
+        </div>
+        <blockquote class="pull-quote reveal"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M10 8H6a4 4 0 0 0-4 4v6h8v-6H6a2 2 0 0 1 2-2h2V8zm10 0h-4a4 4 0 0 0-4 4v6h8v-6h-2a2 2 0 0 1 2-2h2V8z"/></svg><p>“Representation is error correction for the scientific community.” — Dr. Rivera, TEDx Ithaca 2026</p></blockquote>
+      </div>
+    </section>
+
+    <!-- CV -->
+    <section class="section section-alt" id="cv">
+      <div class="section-inner">
+        <h2 class="section-title"><span class="hash">#</span> Curriculum Vitae</h2>
+        <div class="cv-grid">
+          <div>
+            <h3 class="cv-subtitle">Appointments</h3>
+            <ul class="timeline">
+        <li class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div><h3>Associate Professor (tenured), Applied Physics &amp; CS</h3><p class="tl-org">Cornell University · <span class="tl-period">2023 – present</span></p><p class="tl-detail">Quantum Systems Lab · NSF CAREER PI</p></div>
+        </li>
+        <li class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div><h3>Assistant Professor of Applied Physics</h3><p class="tl-org">Cornell University · <span class="tl-period">2019 – 2023</span></p><p class="tl-detail">Junior Faculty awardee, College of Engineering</p></div>
+        </li>
+        <li class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div><h3>Postdoctoral Fellow</h3><p class="tl-org">QuTech, TU Delft · <span class="tl-period">2016 – 2019</span></p><p class="tl-detail">DiVincenzo group · topological qubits program</p></div>
+        </li>
+        <li class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div><h3>PhD, Physics</h3><p class="tl-org">University of Maryland / JQI · <span class="tl-period">2011 – 2016</span></p><p class="tl-detail">Thesis: decoherence-free control of transmon arrays</p></div>
+        </li>
+        <li class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div><h3>BSc (Hons), Physics &amp; Mathematics</h3><p class="tl-org">University of Toronto · <span class="tl-period">2007 – 2011</span></p><p class="tl-detail">Gold Medalist · Undergrad teaching award</p></div>
+        </li>
+            </ul>
+          </div>
+          <div class="cv-side">
+            <h3 class="cv-subtitle">Honors &amp; Awards</h3>
+            <ul class="award-list"><li class="reveal"><span class="award-year">2025</span> Cornell LGBTQ+ Faculty Mentor of the Year</li><li class="reveal"><span class="award-year">2024</span> NSF CAREER Award</li><li class="reveal"><span class="award-year">2023</span> QuTech / IEEE ICQQ Best Paper Award</li><li class="reveal"><span class="award-year">2022</span> Alfred P. Sloan Fellowship</li><li class="reveal"><span class="award-year">2021</span> DOE Early Career Nominee · Cornell Engaged Scholarship Prize</li></ul>
+            <h3 class="cv-subtitle">Professional Service</h3>
+            <ul class="service-list"><li>Referee: Nature, PRL, PRX Quantum, Quantum — 60+ reviews/yr</li><li>Program Committee: QIP, IEEE ICQQ, NeurIPS Quantum Workshop</li><li>Chair, APS Quantum Computing Division DEI subcommittee (2024–26)</li></ul>
+            <a class="btn btn-ghost btn-block" href="#" onclick="alert('PDF download placeholder — drop cv.pdf into /public and point this link at it.');return false;">⬇ Download full CV (PDF)</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="section-inner narrow">
+        <h2 class="section-title"><span class="hash">#</span> Contact</h2>
+        <p class="section-intro">For collaborations, speaking, mentoring requests, or just to say hi — my inbox is an open boundary condition.</p>
+        <form class="contact-form reveal" action="mailto:alex.rivera@cornell.example.edu" method="get" enctype="text/plain">
+          <label>Name<input type="text" name="name" required placeholder="Your name" /></label>
+          <label>Email<input type="email" name="from" required placeholder="you@institution.edu" /></label>
+          <label>Message<textarea name="body" rows="5" required placeholder="Collaboration, mentoring, speaking…"></textarea></label>
+          <button class="btn btn-primary" type="submit">Send ✉</button>
+        </form>
+        <div class="contact-meta reveal">
+          <p>✉ <a href="mailto:alex.rivera@cornell.example.edu">alex.rivera@cornell.example.edu</a></p>
+          <p>🏛 ORCID: 0000-0002-1825-0097 · 🎓 Scholar: EXAMPLE_QI Scholar ID</p>
+          <p>🚪 311 Clark Hall, Ithaca, NY 14853</p>
+          <p>🕑 Office hours: Tuesdays 14:00–16:00 ET (in-person &amp; virtual, tea provided 🫖)</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-rainbow" aria-hidden="true"></div>
+    <p>© 2026 Dr. Alex Rivera, PhD · Built with ♥ and open science · Last updated October 2026</p>
+    <p class="footer-sub">Inspired by <a href="https://gitlab.com/ian-s-mcb/smigle-hugo-theme" target="_blank" rel="noopener">Smigle</a> · Deployed on GitHub Pages</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
