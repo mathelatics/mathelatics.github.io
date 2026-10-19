@@ -1,0 +1,58 @@
+{% include head.html %}
+<body>
+
+{% include nav.html %}
+
+<main>
+  <section class="page">
+    <div class="container prose">
+      {% if page.tag %}
+        <h1>Tag: {{ page.tag }}</h1>
+        <p class="meta">Items tagged <strong>{{ page.tag }}</strong></p>
+        <div class="tag-listing">
+          {% assign all_items = site.portfolio | concat: site.posts | concat: site.publications %}
+          {% for item in all_items %}
+            {% if item.tags contains page.tag %}
+            <div class="list-item">
+              {% if item.collection == "posts" or item.collection == "portfolio" %}
+                <h3><a href="{{ item.url | relative_url }}">{{ item.title }}</a></h3>
+              {% else %}
+                <h3>{{ item.title }}</h3>
+              {% endif %}
+              <div class="venue">
+                {% if item.collection == "posts" %}post
+                {% elsif item.collection == "portfolio" %}project
+                {% else %}publication{% endif %}
+                &middot;
+                {% if item.date %}{{ item.date | date: "%Y" }}{% endif %}
+              </div>
+              {% if item.collection == "publications" and item.paperurl %}
+                <a href="{{ item.paperurl | relative_url }}" target="_blank" rel="noopener">Paper &rarr;</a>
+              {% endif %}
+              <p>{{ item.excerpt | strip_html | truncate: 260 }}</p>
+            </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+        {% if all_items == empty %}
+          <p>No items tagged <strong>{{ page.tag }}</strong> yet.</p>
+        {% endif %}
+      {% else %}
+        <h1>{{ page.title }}</h1>
+        <div class="meta">
+          {% if page.venue %}{{ page.venue }} &middot; {% endif %}
+          {% if page.date %}{{ page.date | date: "%B %Y" }}{% endif %}
+          {% if page.url %}<br><a href="{{ page.url }}" target="_blank" rel="noopener">Project link &rarr;</a>{% endif %}
+        </div>
+        {{ content }}
+      {% endif %}
+    </div>
+  </section>
+</main>
+
+{% include footer.html %}
+
+{% include reveal.html %}
+
+</body>
+</html>

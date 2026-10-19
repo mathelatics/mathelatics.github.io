@@ -1,0 +1,40 @@
+<section id="publications">
+  <div class="container">
+    <h2>Publications</h2>
+    <div class="tag-cloud">
+      <span class="tag-label">Topic:</span>
+      <a href="{{ '/tags/quantum/' | relative_url }}" class="tag-chip">quantum</a>
+      <a href="{{ '/tags/quantum-algorithms/' | relative_url }}" class="tag-chip">quantum algorithms</a>
+      <a href="{{ '/tags/mathematics/' | relative_url }}" class="tag-chip">mathematics</a>
+      <a href="{{ '/tags/differential-geometry/' | relative_url }}" class="tag-chip">differential geometry</a>
+      <a href="{{ '/tags/quantum-error-correction/' | relative_url }}" class="tag-chip">quantum error correction</a>
+      <a href="{{ '/tags/number-systems/' | relative_url }}" class="tag-chip">number systems</a>
+    </div>
+    {% assign lim = include.limit | default: 1000 %}
+    {% assign pubs = site.publications | sort: "date" | reverse %}
+    {% for pub in pubs limit: lim %}
+    <div class="list-item">
+      <h3>{{ pub.title }}</h3>
+      <div class="venue">
+        {% if pub.venue %}{{ pub.venue }} &middot; {% endif %}
+        {{ pub.date | date: "%Y" }}
+      </div>
+      <p>{{ pub.excerpt | strip_html | truncate: 260 }}</p>
+      {% if pub.tags %}
+      <div class="card-tags">
+        {% for tag in pub.tags %}
+        <a href="{{ '/tags/' | append: tag | append: '/' | relative_url }}" class="tag-chip">{{ tag }}</a>
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% if pub.paperurl %}<a href="{{ pub.paperurl }}" target="_blank" rel="noopener">Paper &rarr;</a>{% endif %}
+      {% if pub.slidesurl %}<a href="{{ pub.slidesurl }}" target="_blank" rel="noopener">Slides</a>{% endif %}
+    </div>
+    {% endfor %}
+    {% if include.limit %}
+    <div class="section-more">
+      <a href="{{ '/publications/' | relative_url }}">View all publications &rarr;</a>
+    </div>
+    {% endif %}
+  </div>
+</section>

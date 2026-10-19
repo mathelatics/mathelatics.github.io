@@ -1,0 +1,48 @@
+# Quantum Portfolio — Jekyll single-page portfolio (GitHub Pages)
+# Preview:  jekyll serve
+# Deploy:   push to main; the GitHub Actions workflow builds and deploys to Pages
+
+title: "Quantum Portfolio"
+name: "Quantum Portfolio"
+description: "Quantum computing and quantum algorithms portfolio — HHL, VQE, quantum error correction, and scientific computing research"
+email: "ajeetkamla7897@gmail.com"
+avatar: "/images/Profile3.png"
+
+url: "https://ajeetkbhardwaj.github.io"
+baseurl: "" # "" when deployed at the site root (GitHub user Pages)
+
+# Collections — write your content as markdown here and it is rendered below.
+collections:
+  portfolio:
+    output: false
+  publications:
+    output: false
+  tags:
+    output: true
+
+defaults:
+  - scope:
+      path: "_posts"
+    values:
+      layout: single
+  - scope:
+      path: "_portfolio"
+    values:
+      layout: single
+  - scope:
+      path: "_publications"
+    values:
+      layout: single
+  - scope:
+      path: "_tags"
+    values:
+      layout: single
+
+# Conversion
+markdown: kramdown
+highlighter: rouge
+encoding: "utf-8"
+future: true
+
+# Outputting
+permalink: pretty

@@ -1,0 +1,46 @@
+<section class="section-alt" id="projects">
+  <div class="container">
+    <h2>Projects</h2>
+    <div class="tag-cloud">
+      <span class="tag-label">Topic:</span>
+      <a href="{{ '/tags/quantum/' | relative_url }}" class="tag-chip">quantum</a>
+      <a href="{{ '/tags/quantum-algorithms/' | relative_url }}" class="tag-chip">quantum algorithms</a>
+      <a href="{{ '/tags/ai-systems/' | relative_url }}" class="tag-chip">AI systems</a>
+      <a href="{{ '/tags/llms/' | relative_url }}" class="tag-chip">LLMs</a>
+      <a href="{{ '/tags/deep-learning/' | relative_url }}" class="tag-chip">deep learning</a>
+      <a href="{{ '/tags/high-performance-computing/' | relative_url }}" class="tag-chip">HPC</a>
+      <a href="{{ '/tags/computer-vision/' | relative_url }}" class="tag-chip">computer vision</a>
+    </div>
+    <div class="card-grid">
+      {% assign lim = include.limit | default: 1000 %}
+      {% for item in site.portfolio limit: lim %}
+      <div class="card">
+        {% if item.cover %}
+        <img class="cover" src="{{ item.cover | relative_url }}" alt="{{ item.title }}">
+        {% endif %}
+        <div class="body">
+          {% if item.category %}<div class="cat">{{ item.category }}</div>{% endif %}
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.excerpt | strip_html | truncate: 180 }}</p>
+          {% if item.tags %}
+          <div class="card-tags">
+            {% for tag in item.tags %}
+            <a href="{{ '/tags/' | append: tag | append: '/' | relative_url }}" class="tag-chip">{{ tag }}</a>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+        <div class="links">
+          {% if item.url %}<a href="{{ item.url }}" target="_blank" rel="noopener">View on GitHub &rarr;</a>{% endif %}
+          {% if item.details %}<a href="{{ item.details | relative_url }}">Details</a>{% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% if include.limit %}
+    <div class="section-more">
+      <a href="{{ '/projects/' | relative_url }}">View all projects &rarr;</a>
+    </div>
+    {% endif %}
+  </div>
+</section>

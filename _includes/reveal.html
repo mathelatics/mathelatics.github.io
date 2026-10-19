@@ -1,0 +1,38 @@
+<script>
+(function() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!('IntersectionObserver' in window)) return;
+  var els = document.querySelectorAll('.section-heading, .card, .list-item, .timeline-item, .skill-card, .focus-card');
+  els.forEach(function(el) { el.classList.add('reveal'); });
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  els.forEach(function(el) { io.observe(el); });
+})();
+
+(function() {
+  var KEY = 'theme';
+  var html = document.documentElement;
+  var toggle = document.querySelector('.theme-toggle');
+  var meta = document.querySelector('meta[name="theme-color"]');
+  function setTheme(t) {
+    html.setAttribute('data-theme', t);
+    localStorage.setItem(KEY, t);
+    if (meta) meta.setAttribute('content', t === 'dark' ? '#0b1120' : '#faf7f2');
+  }
+  function init() {
+    var stored = localStorage.getItem(KEY);
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    setTheme(stored || (prefersDark ? 'dark' : 'light'));
+  }
+  init();
+  if (toggle) {
+    toggle.addEventListener('click', function() {
+      var cur = html.getAttribute('data-theme');
+      setTheme(cur === 'dark' ? 'light' : 'dark');
+    });
+  }
+})();
+</script>

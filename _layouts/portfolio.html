@@ -1,0 +1,36 @@
+{% include head.html %}
+<body>
+
+{% include nav.html %}
+
+<main>
+
+<header class="hero" id="home">
+  <div class="container">
+    <div class="hero-pic">
+      <img src="{{ site.avatar | relative_url }}" alt="{{ site.name }}">
+    </div>
+    <div class="hero-text">
+      <p class="hero-role">Quantum Computing &middot; Applied Mathematics &middot; ML Systems</p>
+      <h1>{{ site.name }}</h1>
+      <p class="hero-position">I research quantum algorithms (HHL, VQE, quantum error correction) and build verifiable AI and mathematical computing systems — from Lean 4 proof agents to scientific ML software.</p>
+      <div class="tagline">{{ site.description }}</div>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="mailto:{{ site.email }}">Get in touch</a>
+        <a class="btn btn-secondary" href="https://github.com/ajeetkbhardwaj" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn btn-secondary" href="https://www.linkedin.com/in/ajeetkumar09" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+{{ content }}
+
+</main>
+
+{% include footer.html %}
+
+{% include reveal.html %}
+
+</body>
+</html>
